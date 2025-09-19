@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Calendar, MapPin, Trophy, Users } from "lucide-react";
+import { Calendar, MapPin, Trophy, Users, UserPlus } from "lucide-react";
 import heroBackground from "@/assets/hero-bg.jpg";
 
 interface HeroSectionProps {
   onExploreEvents: () => void;
+  onRegister?: () => void;
 }
 
-export const HeroSection = ({ onExploreEvents }: HeroSectionProps) => {
+export const HeroSection = ({ onExploreEvents, onRegister }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -61,8 +62,8 @@ export const HeroSection = ({ onExploreEvents }: HeroSectionProps) => {
             </div>
           </div>
           
-          {/* CTA Button */}
-          <div className="animate-scale-in">
+          {/* CTA Buttons */}
+          <div className="animate-scale-in flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               variant="hero" 
               size="xl" 
@@ -71,6 +72,18 @@ export const HeroSection = ({ onExploreEvents }: HeroSectionProps) => {
             >
               Explore Events
             </Button>
+            {onRegister && (
+              <Button 
+                variant="outline" 
+                size="xl" 
+                onClick={onRegister}
+                className="animate-float border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                style={{ animationDelay: '0.2s' }}
+              >
+                <UserPlus className="h-5 w-5 mr-2" />
+                Register Now
+              </Button>
+            )}
           </div>
           
           {/* Organizing Institution */}

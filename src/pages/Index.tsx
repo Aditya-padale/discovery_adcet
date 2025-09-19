@@ -5,13 +5,16 @@ import { DepartmentGrid, Department } from "@/components/DepartmentGrid";
 import { EventsList } from "@/components/EventsList";
 import { EventDetails } from "@/components/EventDetails";
 import { ScheduleSection } from "@/components/ScheduleSection";
+import { RegistrationSection } from "@/components/RegistrationSection";
 import { ContactSection } from "@/components/ContactSection";
+import { RegistrationForm } from "@/components/RegistrationForm";
 import { Event } from "@/data/events";
 
 type ViewState = 
   | { type: 'home' }
   | { type: 'events'; department: Department }
-  | { type: 'event-details'; event: Event };
+  | { type: 'event-details'; event: Event }
+  | { type: 'registration'; event?: Event };
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<ViewState>({ type: 'home' });
@@ -31,13 +34,23 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleEventRegister = (event?: Event) => {
+    setCurrentView({ type: 'registration', event });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleGeneralRegister = () => {
+    const registrationSection = document.getElementById('registration');
+    registrationSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const handleBackToHome = () => {
     setCurrentView({ type: 'home' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackToEvents = () => {
-    if (currentView.type === 'event-details') {
+    if (currentView.type === 'event-details' || currentView.type === 'registration') {
       // Get the department from the event to go back to the right events list
       const event = currentView.event;
       const departmentId = event.department.toLowerCase().replace(/[^a-z]/g, '');
@@ -119,6 +132,15 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  if (currentView.type === 'registration') {
+    return (
+      <RegistrationForm 
+        eventTitle={currentView.event?.name}
+        onBack={currentView.event ? handleBackToEvents : handleBackToHome}
+      />
+    );
+  }
+
   if (currentView.type === 'events') {
     return (
       <EventsList 
@@ -134,16 +156,21 @@ const Index = () => {
       <EventDetails 
         event={currentView.event}
         onBack={handleBackToEvents}
+        onRegister={() => handleEventRegister(currentView.event)}
       />
     );
   }
 
   return (
     <div className="min-h-screen">
-      <HeroSection onExploreEvents={handleExploreEvents} />
+      <HeroSection 
+        onExploreEvents={handleExploreEvents} 
+        onRegister={handleGeneralRegister}
+      />
       <AboutSection />
       <DepartmentGrid onDepartmentSelect={handleDepartmentSelect} />
       <ScheduleSection />
+      <RegistrationSection />
       <ContactSection />
     </div>
   );

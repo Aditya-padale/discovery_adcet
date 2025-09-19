@@ -13,25 +13,33 @@ import {
   GraduationCap,
   BookOpen,
   Target,
-  CheckCircle
+  CheckCircle,
+  UserPlus
 } from "lucide-react";
 import { Event } from "@/data/events";
 
 interface EventDetailsProps {
   event: Event;
   onBack: () => void;
+  onRegister?: () => void;
 }
 
-export const EventDetails = ({ event, onBack }: EventDetailsProps) => {
+export const EventDetails = ({ event, onBack, onRegister }: EventDetailsProps) => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center justify-between gap-4 mb-8">
           <Button variant="ghost" onClick={onBack} className="hover:bg-primary/20">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Events
           </Button>
+          {onRegister && (
+            <Button onClick={onRegister} className="bg-primary hover:bg-primary/90">
+              <UserPlus className="h-4 w-4 mr-2" />
+              Register Now
+            </Button>
+          )}
         </div>
 
         {/* Event Title */}
@@ -202,6 +210,28 @@ export const EventDetails = ({ event, onBack }: EventDetailsProps) => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Registration Call to Action */}
+          {onRegister && (
+            <Card className="festival-card border-primary/30 bg-gradient-to-r from-primary/5 to-secondary/5">
+              <CardContent className="pt-6">
+                <div className="text-center space-y-4">
+                  <h3 className="text-2xl font-bold text-primary">Ready to Participate?</h3>
+                  <p className="text-muted-foreground">
+                    Register now to secure your spot in this exciting event!
+                  </p>
+                  <Button 
+                    onClick={onRegister} 
+                    size="lg" 
+                    className="bg-primary hover:bg-primary/90 text-lg px-8 py-3"
+                  >
+                    <UserPlus className="h-5 w-5 mr-2" />
+                    Register for {event.name}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </section>

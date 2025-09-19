@@ -1,73 +1,73 @@
-# Welcome to your Lovable project
+# Discovery 2K25 - National Level Technical Festival
 
-## Project info
+A modern, responsive website for Discovery 2K25, the National Level Technical Festival at ADCET, Ashta.
 
-**URL**: https://lovable.dev/projects/ee2bd4c3-8d18-4211-a887-4fc8458166fe
+## About
 
-## How can I edit this code?
+Discovery 2K25 is a premier technical festival featuring 24+ competitions across various engineering departments. The event is scheduled for October 11, 2025, at ADCET, Ashta.
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+- Responsive design optimized for all devices
+- Event registration system
+- Department-wise competition listings
+- Schedule and event details
+- Contact information and venue details
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ee2bd4c3-8d18-4211-a887-4fc8458166fe) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## Technologies Used
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Vite** - Fast build tool and development server
+- **TypeScript** - Type-safe JavaScript
+- **React** - Component-based UI library
+- **shadcn/ui** - Modern UI components
+- **Tailwind CSS** - Utility-first CSS framework
 
-## How can I deploy this project?
+## Getting Started
 
-Simply open [Lovable](https://lovable.dev/projects/ee2bd4c3-8d18-4211-a887-4fc8458166fe) and click on Share -> Publish.
+To run this project locally:
 
-## Can I connect a custom domain to my Lovable project?
+```sh
+# Clone the repository
+git clone <repository-url>
 
-Yes, you can!
+# Navigate to the project directory
+cd discovery-2k25
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+# Install dependencies
+npm install
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# Start the development server
+npm run dev
+```
+
+## Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # shadcn/ui components
+│   ├── HeroSection.tsx
+│   ├── EventsList.tsx
+│   └── ...
+├── data/               # Static data files
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions
+└── pages/              # Page components
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## Contact
+
+For questions about Discovery 2K25, please contact ADCET, Ashta.
+
+## License
+
+This project is open source and available under the MIT License.
