@@ -2,171 +2,120 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Discovery 2K25 Festival Design System - Premium Professional Theme */
+/* Discovery 2K25 Festival Design System - Futuristic Neon Theme */
 
 @layer base {
   :root {
-    /* Dark premium base with depth */
-    --background: 222 84% 4%;
+    /* Dark futuristic base */
+    --background: 220 27% 8%;
     --foreground: 0 0% 98%;
 
-    /* Sophisticated surfaces with glass morphism */
-    --card: 222 84% 8%;
+    /* Card surfaces with subtle transparency */
+    --card: 220 27% 12%;
     --card-foreground: 0 0% 98%;
 
-    /* Elevated elements */
-    --popover: 222 84% 6%;
+    /* Popover elements */
+    --popover: 220 27% 10%;
     --popover-foreground: 0 0% 98%;
 
-    /* Premium electric blue primary */
-    --primary: 210 100% 55%;
-    --primary-foreground: 222 84% 4%;
+    /* Primary neon cyan */
+    --primary: 180 100% 50%;
+    --primary-foreground: 220 27% 8%;
 
-    /* Sophisticated purple secondary */
-    --secondary: 270 95% 65%;
-    --secondary-foreground: 222 84% 4%;
+    /* Secondary neon purple */
+    --secondary: 280 100% 70%;
+    --secondary-foreground: 220 27% 8%;
 
-    /* Refined muted tones */
-    --muted: 222 84% 12%;
-    --muted-foreground: 220 8% 70%;
+    /* Muted elements */
+    --muted: 220 27% 15%;
+    --muted-foreground: 220 9% 65%;
 
-    /* Premium accent - electric cyan */
-    --accent: 180 100% 60%;
-    --accent-foreground: 222 84% 4%;
+    /* Accent neon pink */
+    --accent: 320 100% 70%;
+    --accent-foreground: 220 27% 8%;
 
-    /* Alert colors */
-    --destructive: 0 85% 55%;
+    /* Destructive neon red */
+    --destructive: 0 100% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Subtle borders and inputs */
-    --border: 222 84% 15%;
-    --input: 222 84% 10%;
-    --ring: 210 100% 55%;
+    /* Borders and inputs */
+    --border: 220 27% 20%;
+    --input: 220 27% 15%;
+    --ring: 180 100% 50%;
 
-    /* Premium color palette */
-    --electric-blue: 210 100% 55%;
-    --cyber-purple: 270 95% 65%;
-    --neon-cyan: 180 100% 60%;
-    --plasma-pink: 315 100% 65%;
-    --quantum-orange: 25 100% 60%;
-    --matrix-green: 140 100% 55%;
-    --void-indigo: 240 100% 60%;
+    /* Festival specific colors */
+    --neon-blue: 210 100% 50%;
+    --neon-purple: 280 100% 70%;
+    --neon-pink: 320 100% 70%;
+    --neon-orange: 30 100% 60%;
+    --neon-green: 120 100% 50%;
     
-    /* Professional gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(222 84% 4%) 0%, hsl(240 100% 8%) 25%, hsl(270 95% 10%) 50%, hsl(222 84% 4%) 100%);
-    --gradient-premium: linear-gradient(135deg, hsl(210 100% 55% / 0.15) 0%, hsl(270 95% 65% / 0.15) 50%, hsl(180 100% 60% / 0.15) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(222 84% 8% / 0.95) 0%, hsl(240 100% 8% / 0.9) 100%);
-    --gradient-glass: linear-gradient(135deg, hsl(222 84% 12% / 0.8) 0%, hsl(270 95% 15% / 0.6) 100%);
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 27% 8%), hsl(280 100% 10%));
+    --gradient-neon: linear-gradient(45deg, hsl(180 100% 50%), hsl(280 100% 70%), hsl(320 100% 70%));
+    --gradient-card: linear-gradient(135deg, hsl(220 27% 12% / 0.8), hsl(280 100% 10% / 0.8));
     
-    /* Premium shadows and effects */
-    --shadow-premium: 0 25px 50px -12px hsl(222 84% 4% / 0.8);
-    --shadow-glow-blue: 0 0 50px hsl(210 100% 55% / 0.4);
-    --shadow-glow-purple: 0 0 50px hsl(270 95% 65% / 0.3);
-    --shadow-glow-cyan: 0 0 50px hsl(180 100% 60% / 0.3);
-    --shadow-elevated: 0 20px 40px -10px hsl(222 84% 4% / 0.6);
+    /* Shadows with neon glow */
+    --shadow-neon: 0 0 20px hsl(180 100% 50% / 0.3);
+    --shadow-card: 0 10px 30px hsl(220 27% 8% / 0.5);
     
-    /* Animation curves */
-    --ease-premium: cubic-bezier(0.23, 1, 0.32, 1);
-    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --ease-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Animation timing */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    --radius: 1rem;
-    
-    /* Sidebar variables for compatibility */
+    --radius: 0.75rem;
+
     --sidebar-background: 0 0% 98%;
+
     --sidebar-foreground: 240 5.3% 26.1%;
+
     --sidebar-primary: 240 5.9% 10%;
+
     --sidebar-primary-foreground: 0 0% 98%;
+
     --sidebar-accent: 240 4.8% 95.9%;
+
     --sidebar-accent-foreground: 240 5.9% 10%;
+
     --sidebar-border: 220 13% 91%;
+
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  /* Light mode not needed for festival theme - keeping dark aesthetic */
 }
 
-/* Premium utility classes for professional effects */
+/* Custom utility classes for festival effects */
 @layer utilities {
-  .text-gradient-premium {
-    @apply bg-gradient-to-r from-electric-blue via-cyber-purple to-neon-cyan bg-clip-text text-transparent;
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
   }
   
-  .text-gradient-accent {
-    @apply bg-gradient-to-r from-plasma-pink via-quantum-orange to-matrix-green bg-clip-text text-transparent;
+  .neon-glow {
+    box-shadow: var(--shadow-neon);
   }
   
-  .premium-glow {
-    box-shadow: var(--shadow-glow-blue);
-  }
-  
-  .glass-morphism {
-    background: var(--gradient-glass);
-    backdrop-filter: blur(20px);
-    border: 1px solid hsl(222 84% 20% / 0.3);
-  }
-  
-  .premium-card {
-    background: var(--gradient-card);
-    backdrop-filter: blur(16px);
-    border: 1px solid hsl(222 84% 20% / 0.2);
-    box-shadow: var(--shadow-premium);
-  }
-  
-  .hero-bg-pattern {
-    background: var(--gradient-hero);
-    position: relative;
-  }
-  
-  .hero-bg-pattern::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-      radial-gradient(circle at 20% 20%, hsl(210 100% 55% / 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(270 95% 65% / 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 40% 80%, hsl(180 100% 60% / 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, hsl(315 100% 65% / 0.15) 0%, transparent 50%);
-  }
-  
-  .geometric-grid {
+  .hero-pattern {
     background-image: 
-      linear-gradient(hsl(222 84% 20% / 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(222 84% 20% / 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
+      radial-gradient(circle at 20% 50%, hsl(180 100% 50% / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(280 100% 70% / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, hsl(320 100% 70% / 0.1) 0%, transparent 50%);
   }
   
-  .floating-orb {
-    @apply absolute rounded-full blur-xl opacity-20 animate-pulse;
+  .geometric-pattern {
+    background-image: 
+      linear-gradient(45deg, hsl(180 100% 50% / 0.05) 25%, transparent 25%),
+      linear-gradient(-45deg, hsl(280 100% 70% / 0.05) 25%, transparent 25%);
+    background-size: 30px 30px;
   }
   
-  .hover-lift {
-    @apply transition-all duration-500;
-    transition-timing-function: var(--ease-premium);
+  .festival-card {
+    @apply bg-gradient-to-br from-card/80 to-muted/60 backdrop-blur-sm border border-border/30;
+    box-shadow: var(--shadow-card);
   }
   
-  .hover-lift:hover {
-    @apply -translate-y-3 scale-[1.02];
-    box-shadow: var(--shadow-elevated);
-  }
-  
-  .premium-button {
-    @apply relative overflow-hidden;
-    background: linear-gradient(135deg, hsl(210 100% 55%) 0%, hsl(270 95% 65%) 100%);
-    box-shadow: 
-      0 0 30px hsl(210 100% 55% / 0.3),
-      inset 0 1px 0 hsl(0 0% 100% / 0.2);
-  }
-  
-  .premium-button::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 0%, hsl(0 0% 100% / 0.1) 50%, transparent 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  .premium-button:hover::before {
-    opacity: 1;
+  .hover-float {
+    @apply transition-transform duration-300 hover:-translate-y-2 hover:scale-[1.02];
   }
 }
 
