@@ -49,63 +49,72 @@ const Index = () => {
           name: 'Aeronautical Engineering',
           icon: null,
           eventCount: 3,
-          gradient: 'from-neon-blue to-primary'
+          gradient: 'from-electric-blue to-neon-cyan',
+          description: 'Sky\'s the limit with aerospace innovation'
         },
         'mechanicalengineering': {
           id: 'mechanical',
           name: 'Mechanical Engineering', 
           icon: null,
           eventCount: 3,
-          gradient: 'from-neon-orange to-accent'
+          gradient: 'from-quantum-orange to-plasma-pink',
+          description: 'Powering the future with mechanical excellence'
         },
         'electricalengineering': {
           id: 'electrical',
           name: 'Electrical Engineering',
           icon: null,
           eventCount: 3,
-          gradient: 'from-neon-green to-secondary'
+          gradient: 'from-matrix-green to-neon-cyan',
+          description: 'Electrifying innovations in power & energy'
         },
         'civilengineering': {
           id: 'civil',
           name: 'Civil Engineering',
           icon: null,
           eventCount: 3,
-          gradient: 'from-neon-purple to-primary'
+          gradient: 'from-cyber-purple to-void-indigo',
+          description: 'Building tomorrow\'s smart infrastructure'
         },
         'computerscienceengineering': {
           id: 'cse',
           name: 'Computer Science Engineering',
           icon: null,
           eventCount: 3,
-          gradient: 'from-primary to-neon-pink'
+          gradient: 'from-electric-blue to-cyber-purple',
+          description: 'Coding the future with cutting-edge tech'
         },
         'aidatascience': {
           id: 'aids',
           name: 'AI & Data Science',
           icon: null,
           eventCount: 3,
-          gradient: 'from-secondary to-neon-blue'
+          gradient: 'from-plasma-pink to-electric-blue',
+          description: 'Intelligence meets data-driven solutions'
         },
         'iotcybersecurity': {
           id: 'iot',
           name: 'IoT & Cyber Security',
           icon: null,
           eventCount: 3,
-          gradient: 'from-accent to-neon-green'
+          gradient: 'from-neon-cyan to-matrix-green',
+          description: 'Securing the connected world'
         },
         'businessadministration': {
           id: 'bba',
           name: 'Business Administration',
           icon: null,
           eventCount: 1,
-          gradient: 'from-neon-orange to-neon-purple'
+          gradient: 'from-quantum-orange to-cyber-purple',
+          description: 'Strategic leadership for digital age'
         },
         'foodtechnology': {
           id: 'food',
           name: 'Food Technology',
           icon: null,
           eventCount: 2,
-          gradient: 'from-neon-pink to-neon-orange'
+          gradient: 'from-plasma-pink to-quantum-orange',
+          description: 'Innovating sustainable food solutions'
         }
       };
 
