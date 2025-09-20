@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -7,21 +7,44 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, CheckCircle, UserPlus, Award, IndianRupee } from "lucide-react";
+import { Loader2, CheckCircle, UserPlus, Award, IndianRupee, Users, User, Trash2 } from "lucide-react";
 import { getAllEvents, type Event } from "@/data/events";
 
-const registrationSchema = z.object({
-  selectedEvent: z.string().min(1, "Please select an event"),
-  teamSize: z.string().min(1, "Please select team size"),
-  participantNames: z.string().min(2, "Please enter the full names of all participants"),
+// Team member schema
+const teamMemberSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  mobile: z.string().regex(/^\d{10,15}$/, "Mobile number should contain only digits"),
   email: z.string().email("Please enter a valid email address"),
-  mobile: z.string().min(10, "Please enter a valid mobile number").regex(/^\d{10,15}$/, "Mobile number should contain only digits"),
-  college: z.string().min(2, "Please enter your college/institution name"),
-  department: z.string().min(1, "Please select your department"),
-  yearOfStudy: z.string().min(1, "Please select your year of study"),
-  city: z.string().min(2, "Please enter your city"),
+  college: z.string().min(2, "Please enter college name"),
+});
+
+// Main registration schema
+const registrationSchema = z.object({
+  // Leader details
+  leaderName: z.string().min(2, "Name must be at least 2 characters"),
+  leaderCollege: z.string().min(2, "Please enter your college name"),
+  leaderEmail: z.string().email("Please enter a valid email address"),
+  leaderMobile: z.string().regex(/^\d{10,15}$/, "Mobile number should contain only digits"),
+  leaderDepartment: z.string().min(1, "Please select your department"),
+  leaderYear: z.string().min(1, "Please select your year of study"),
+  leaderCity: z.string().min(2, "Please enter your city"),
+  
+  // Event selection
+  selectedEvent: z.string().min(1, "Please select an event"),
+  paperPresentationDept: z.string().optional(),
+  
+  // Team details
+  participationType: z.enum(["solo", "team"], {
+    required_error: "Please select participation type",
+  }),
+  teamSize: z.number().min(1).max(4).optional(),
+  
+  // Team members (conditional)
+  teamMembers: z.array(teamMemberSchema).optional(),
 });
 
 type RegistrationFormValues = z.infer<typeof registrationSchema>;
@@ -50,8 +73,10 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [participationType, setParticipationType] = useState<"solo" | "team">("solo");
   const [teamSize, setTeamSize] = useState<number>(1);
   const [totalFee, setTotalFee] = useState<number>(0);
+  const [showPaperPresentationDept, setShowPaperPresentationDept] = useState(false);
   const { toast } = useToast();
 
   const allEvents = getAllEvents();
@@ -59,39 +84,83 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
   const form = useForm<RegistrationFormValues>({
     resolver: zodResolver(registrationSchema),
     defaultValues: {
+      leaderName: "",
+      leaderCollege: "",
+      leaderEmail: "",
+      leaderMobile: "",
+      leaderDepartment: "",
+      leaderYear: "",
+      leaderCity: "",
       selectedEvent: "",
-      teamSize: "",
-      participantNames: "",
-      email: "",
-      mobile: "",
-      college: "",
-      department: "",
-      yearOfStudy: "",
-      city: "",
+      paperPresentationDept: "",
+      participationType: "solo",
+      teamSize: 1,
+      teamMembers: [],
     },
   });
 
-  // Calculate total fee when event or team size changes
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "teamMembers",
+  });
+
+  // Calculate total fee based on participation type and team size
   useEffect(() => {
-    if (selectedEvent && teamSize) {
-      setTotalFee(selectedEvent.entryFee * teamSize);
+    if (participationType === "solo") {
+      setTotalFee(100);
+      setTeamSize(1);
+      form.setValue("teamSize", 1);
+      form.setValue("teamMembers", []);
+    } else {
+      const fee = teamSize * 100;
+      setTotalFee(fee);
+      form.setValue("teamSize", teamSize);
+      
+      // Adjust team members array
+      const currentMembers = form.getValues("teamMembers") || [];
+      const targetMemberCount = teamSize - 1; // -1 because leader is separate
+      
+      if (currentMembers.length < targetMemberCount) {
+        // Add empty members
+        for (let i = currentMembers.length; i < targetMemberCount; i++) {
+          append({ name: "", mobile: "", email: "", college: "" });
+        }
+      } else if (currentMembers.length > targetMemberCount) {
+        // Remove excess members
+        for (let i = currentMembers.length - 1; i >= targetMemberCount; i--) {
+          remove(i);
+        }
+      }
     }
-  }, [selectedEvent, teamSize]);
+  }, [participationType, teamSize, form, append, remove]);
 
   const handleEventChange = (eventId: string) => {
     const event = allEvents.find(e => e.id === eventId);
     setSelectedEvent(event || null);
     form.setValue("selectedEvent", eventId);
     
-    // Reset team size when event changes
-    setTeamSize(1);
-    form.setValue("teamSize", "1");
+    // Check if it's a Paper Presentation event
+    const isPaperPresentation = event?.name === "Paper Presentation";
+    setShowPaperPresentationDept(isPaperPresentation);
+    
+    if (!isPaperPresentation) {
+      form.setValue("paperPresentationDept", "");
+    }
   };
 
-  const handleTeamSizeChange = (size: string) => {
-    const sizeNum = parseInt(size);
-    setTeamSize(sizeNum);
-    form.setValue("teamSize", size);
+  const handleParticipationTypeChange = (type: "solo" | "team") => {
+    setParticipationType(type);
+    form.setValue("participationType", type);
+    
+    if (type === "solo") {
+      setTeamSize(1);
+    } else {
+      setTeamSize(2); // Default to 2 members for team
+    }
+  };
+
+  const handleTeamSizeChange = (size: number) => {
+    setTeamSize(size);
   };
 
   const onSubmit = async (values: RegistrationFormValues) => {
@@ -103,9 +172,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
       console.log("Registration Data:", {
         ...values,
         selectedEventDetails: selectedEvent,
-        teamSize,
         totalFee,
-        eventTitle,
         registrationDate: new Date().toISOString(),
       });
 
@@ -132,9 +199,17 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
           <CardContent className="pt-6">
             <CheckCircle className="mx-auto h-16 w-16 text-green-500 mb-4" />
             <h2 className="text-2xl font-bold text-green-600 mb-2">Registration Successful!</h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-4">
               Thank you for registering{eventTitle ? ` for ${eventTitle}` : ""}. 
-              You will receive a confirmation email with further details shortly.
+            </p>
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-4 rounded-lg border border-primary/30 mb-6">
+              <p className="text-lg font-semibold flex items-center justify-center gap-1">
+                <IndianRupee className="h-5 w-5" />
+                Total Fee: ₹{totalFee}/-
+              </p>
+            </div>
+            <p className="text-sm text-muted-foreground mb-6">
+              You will receive a confirmation email with payment details and further instructions shortly.
             </p>
             <div className="space-y-2">
               <Button onClick={() => setIsSubmitted(false)} variant="outline" className="w-full">
@@ -154,7 +229,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-8 px-4">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <Card>
           <CardHeader className="text-center">
             <div className="flex items-center justify-center mb-4">
@@ -167,20 +242,151 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
               </CardDescription>
             )}
             <CardDescription>
-              Please fill out all the required information to complete your registration.
+              Fill out the registration form step by step to complete your registration.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                {/* Event Selection */}
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                
+                {/* Leader Details Section */}
+                <div className="bg-muted/30 p-6 rounded-lg border-2 border-primary/20">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <User className="h-5 w-5 text-primary" />
+                    Leader (Main Registrant) Details
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="leaderName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Full Name *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter your full name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="leaderCollege"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>College *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter your college name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="leaderEmail"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email *</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="your.email@example.com" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="leaderMobile"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Mobile Number *</FormLabel>
+                          <FormControl>
+                            <Input type="tel" placeholder="9876543210" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="leaderDepartment"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Department *</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select department" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {departments.map((dept) => (
+                                <SelectItem key={dept} value={dept}>
+                                  {dept}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="leaderYear"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Year of Study *</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select year" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {years.map((year) => (
+                                <SelectItem key={year} value={year}>
+                                  {year}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="leaderCity"
+                      render={({ field }) => (
+                        <FormItem className="md:col-span-2">
+                          <FormLabel>City *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter your city" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+
+                {/* Event Selection Section */}
                 <div className="bg-muted/30 p-6 rounded-lg border-2 border-primary/20">
                   <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                     <Award className="h-5 w-5 text-primary" />
-                    Event Selection & Team Details
+                    Event Selection
                   </h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div className="space-y-4">
                     <FormField
                       control={form.control}
                       name="selectedEvent"
@@ -209,54 +415,108 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
                       )}
                     />
 
+                    {showPaperPresentationDept && (
+                      <FormField
+                        control={form.control}
+                        name="paperPresentationDept"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Select Department for Paper Presentation *</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Choose department" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {departments.filter(dept => dept !== "Other").map((dept) => (
+                                  <SelectItem key={dept} value={dept}>
+                                    {dept}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
+                  </div>
+                </div>
+
+                {/* Team Size & Fees Section */}
+                <div className="bg-muted/30 p-6 rounded-lg border-2 border-primary/20">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <Users className="h-5 w-5 text-primary" />
+                    Team Size & Fees
+                  </h3>
+                  
+                  <div className="space-y-6">
                     <FormField
                       control={form.control}
-                      name="teamSize"
+                      name="participationType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Team Size *</FormLabel>
-                          <Select 
-                            onValueChange={handleTeamSizeChange} 
-                            defaultValue={field.value}
-                            disabled={!selectedEvent}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select team size" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {selectedEvent && Array.from(
-                                { length: selectedEvent.maxTeamSize }, 
-                                (_, i) => i + 1
-                              ).map((size) => (
-                                <SelectItem key={size} value={size.toString()}>
-                                  {size} {size === 1 ? 'Participant' : 'Participants'}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
+                          <FormLabel>Do you want to participate solo or as a team? *</FormLabel>
+                          <FormControl>
+                            <RadioGroup
+                              onValueChange={(value) => {
+                                field.onChange(value);
+                                handleParticipationTypeChange(value as "solo" | "team");
+                              }}
+                              defaultValue={field.value}
+                              className="flex gap-6"
+                            >
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="solo" id="solo" />
+                                <Label htmlFor="solo" className="cursor-pointer">
+                                  Solo (₹100)
+                                </Label>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <RadioGroupItem value="team" id="team" />
+                                <Label htmlFor="team" className="cursor-pointer">
+                                  Team (₹100 per member)
+                                </Label>
+                              </div>
+                            </RadioGroup>
+                          </FormControl>
                           <FormMessage />
-                          {selectedEvent && (
-                            <p className="text-xs text-muted-foreground">
-                              Maximum {selectedEvent.maxTeamSize} participants allowed
-                            </p>
-                          )}
                         </FormItem>
                       )}
                     />
-                  </div>
 
-                  {/* Fee Display */}
-                  {selectedEvent && teamSize > 0 && (
+                    {participationType === "team" && (
+                      <div className="space-y-4">
+                        <div>
+                          <Label className="text-sm font-medium">Select Team Size *</Label>
+                          <div className="flex gap-2 mt-2">
+                            {[2, 3, 4].map((size) => (
+                              <Button
+                                key={size}
+                                type="button"
+                                variant={teamSize === size ? "default" : "outline"}
+                                size="sm"
+                                onClick={() => handleTeamSizeChange(size)}
+                              >
+                                {size} Members (₹{size * 100})
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Fee Display */}
                     <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-4 rounded-lg border border-primary/30">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="font-medium">Selected Event: {selectedEvent.name}</p>
-                          <p className="text-sm text-muted-foreground">{selectedEvent.department}</p>
-                          <p className="text-sm text-muted-foreground">
-                            Team Size: {teamSize} {teamSize === 1 ? 'Participant' : 'Participants'}
+                          <p className="font-medium">
+                            Participation: {participationType === "solo" ? "Solo" : `Team of ${teamSize}`}
                           </p>
+                          {selectedEvent && (
+                            <p className="text-sm text-muted-foreground">Event: {selectedEvent.name}</p>
+                          )}
                         </div>
                         <div className="text-right">
                           <p className="text-2xl font-bold text-primary flex items-center gap-1">
@@ -264,164 +524,93 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
                             {totalFee}/-
                           </p>
                           <p className="text-xs text-muted-foreground">
-                            ₹{selectedEvent.entryFee}/- per participant
+                            ₹100/- per member
                           </p>
                         </div>
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
 
-                <FormField
-                  control={form.control}
-                  name="participantNames"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Full Name{teamSize > 1 ? 's' : ''} (All Participants) *
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder={
-                            teamSize > 1 
-                              ? `Enter the full names of all ${teamSize} participants (one per line)`
-                              : "Enter your full name"
-                          }
-                          className="min-h-[80px]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                      {teamSize > 1 && (
-                        <p className="text-xs text-muted-foreground">
-                          Please enter one name per line for {teamSize} participants
-                        </p>
-                      )}
-                    </FormItem>
-                  )}
-                />
+                {/* Team Members Section - Only show if team is selected */}
+                {participationType === "team" && teamSize > 1 && (
+                  <div className="bg-muted/30 p-6 rounded-lg border-2 border-primary/20">
+                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                      <Users className="h-5 w-5 text-primary" />
+                      Team Member Details
+                    </h3>
+                    
+                    <div className="space-y-6">
+                      {fields.map((field, index) => (
+                        <div key={field.id} className="p-4 border rounded-lg space-y-4">
+                          <div className="flex items-center justify-between">
+                            <h4 className="font-medium">Member {index + 2}</h4>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <FormField
+                              control={form.control}
+                              name={`teamMembers.${index}.name`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Name *</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="Enter member name" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
 
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email Address *</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="your.email@example.com"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                            <FormField
+                              control={form.control}
+                              name={`teamMembers.${index}.mobile`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Mobile Number *</FormLabel>
+                                  <FormControl>
+                                    <Input type="tel" placeholder="9876543210" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
 
-                <FormField
-                  control={form.control}
-                  name="mobile"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Mobile Number (WhatsApp preferred) *</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="tel"
-                          placeholder="9876543210"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                            <FormField
+                              control={form.control}
+                              name={`teamMembers.${index}.email`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Email *</FormLabel>
+                                  <FormControl>
+                                    <Input type="email" placeholder="member@example.com" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
 
-                <FormField
-                  control={form.control}
-                  name="college"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>College / Institution Name *</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Enter your college or institution name"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                            <FormField
+                              control={form.control}
+                              name={`teamMembers.${index}.college`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>College *</FormLabel>
+                                  <FormControl>
+                                    <Input placeholder="Enter college name" {...field} />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="department"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Department *</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select department" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {departments.map((dept) => (
-                              <SelectItem key={dept} value={dept}>
-                                {dept}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="yearOfStudy"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Year of Study *</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select year" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {years.map((year) => (
-                              <SelectItem key={year} value={year}>
-                                {year}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="city"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>City *</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Enter your city"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <Separator />
 
                 <div className="flex space-x-4 pt-4">
                   {onBack && (
@@ -436,7 +625,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
                   )}
                   <Button
                     type="submit"
-                    disabled={isSubmitting || !selectedEvent || !teamSize}
+                    disabled={isSubmitting || !selectedEvent}
                     className="flex-1"
                   >
                     {isSubmitting ? (
@@ -447,7 +636,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
                     ) : (
                       <>
                         <UserPlus className="mr-2 h-4 w-4" />
-                        Submit Registration {totalFee > 0 && `(₹${totalFee}/-)`}
+                        Submit Registration (₹{totalFee}/-)
                       </>
                     )}
                   </Button>
