@@ -251,7 +251,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       id: "bgmi-dominator",
       name: "BGMI Dominator",
       department: "AI & Data Science",
-      maxTeamSize: 2,
+      maxTeamSize: 4,
       entryFee: 100,
       description: "Esports competition featuring BGMI battles"
     },
