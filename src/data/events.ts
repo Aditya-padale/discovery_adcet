@@ -5,6 +5,7 @@ export interface Event {
   maxTeamSize: number;
   entryFee: number;
   description?: string;
+  image?: string;
   topics?: string[];
   rules?: string[];
   coordinators?: {
@@ -40,7 +41,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Aeronautical Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Present your research on advanced aeronautical engineering topics",
+      image: "/paper_presentation.png",
+      description: "Present cutting-edge research on advanced aeronautical engineering topics including materials science, structural design, aerodynamics, and UAV technologies. Showcase your academic research and technical expertise to industry professionals.",
       topics: [
         "Advanced Materials and Manufacturing",
         "High-Temperature Materials and composites", 
@@ -81,7 +83,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Aeronautical Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Design and build paper gliders for maximum flight distance and time",
+      image: "/Paper_Glider.png",
+      description: "Design and build innovative paper gliders optimized for maximum flight distance and time. Test your aerodynamic knowledge and engineering skills in this exciting hands-on competition where creativity meets physics.",
       rules: [
         "Teams must consist of minimum 2 and maximum 4 members.",
         "Rockets/gliders must be constructed only from paper, tape and adhesive (no cardboard, plastic, metal, wood or foam).",
@@ -91,7 +94,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Pre-flight inspection by judges is mandatory; non-compliant entries will be disqualified.",
         "Safety goggles must be worn by team members in the launch area.",
         "Entry Fee: Rs. 100/- per participant."
-      ]
+      ],
+      coordinators: {
+        faculty: {
+          name: "Dr. Sudharson Murugan",
+          phone: "9790551772",
+          email: "sm_aero@adcet.in"
+        },
+        student: {
+          name: "Vedanti Gondhali", 
+          phone: "9867980126",
+          email: "vedantigondhali@gmail.com"
+        }
+      }
     },
     {
       id: "water-rocket",
@@ -99,7 +114,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Aeronautical Engineering", 
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Build and launch water rockets for maximum altitude and accuracy",
+      image: "/Water_rocket.png",
+      description: "Build and launch water-powered rockets for maximum altitude and accuracy. Apply principles of propulsion, aerodynamics, and structural design to create the ultimate high-flying rocket using only water and compressed air.",
       rules: [
         "Teams must consist of minimum 2 and maximum 4 members.",
         "Rockets must be built around standard PET bottles (2L or smaller). Additional materials such as paper, cardboard, tape and adhesives are permitted for fins and nose cones; metal, wood or glass are prohibited.",
@@ -110,7 +126,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Organizers will set and maintain a standard launch pressure (80 psi) for all rockets.",
         "Pre-launch checks will be performed by judges; non-compliant entries will be disqualified.",
         "Entry Fee: Rs. 100/- per participant."
-      ]
+      ],
+      coordinators: {
+        faculty: {
+          name: "Dr. Sudharson Murugan",
+          phone: "9790551772",
+          email: "sm_aero@adcet.in"
+        },
+        student: {
+          name: "Vedanti Gondhali", 
+          phone: "9867980126",
+          email: "vedantigondhali@gmail.com"
+        }
+      }
     }
   ],
   mechanical: [
@@ -120,7 +148,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Mechanical Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Present innovative research in mechanical engineering",
+      image: "/paper_presentation.png",
+      description: "Present innovative research in mechanical engineering covering automation, automotive innovations, thermal systems, manufacturing processes, and renewable energy technologies. Share groundbreaking ideas and technical solutions.",
       topics: [
         "Advances in Automation and Robotics",
         "Innovations in Automotive Industries", 
@@ -131,7 +160,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Machine Design and Mechatronics",
         "Renewable Energy Technologies"
     ],
-    rules: paperPresentationRules
+    rules: paperPresentationRules,
+    coordinators: {
+      faculty: {
+        name: "Mr. Suhas R. Deore",
+        phone: "9822455821",
+        email: "srd_mech@adcet.in"
+      },
+      student: {
+        name: "Arjun Patil", 
+        phone: "9876543210",
+        email: "arjunpatil@gmail.com"
+      }
+    }
     },
     {
       id: "robo-race",
@@ -139,7 +180,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Mechanical Engineering",
       maxTeamSize: 2,
       entryFee: 100,
-      description: "Design autonomous robots to navigate through challenging race tracks"
+      image: "/Robo_race.png",
+      description: "Design and build high-speed autonomous robots to navigate through challenging race tracks filled with obstacles. Showcase your robotics, programming, and mechanical engineering skills in this thrilling competition."
       ,
       rules: [
         "Bot dimensions must not exceed 300 mm x 300 mm x 300 mm (L x B x H).",
@@ -154,7 +196,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Only three hand touches are allowed during the run; after the third touch the team will be disqualified.",
         "Referee decisions are final and binding.",
         "Race gameplay: the bot must navigate between checkpoints; skipping an obstacle will result in point deductions; if the bot goes out of track it must be restarted from the previous checkpoint; complete all checkpoints to finish the race."
-      ]
+      ],
+      coordinators: {
+        faculty: {
+          name: "Mr. Suhas R. Deore",
+          phone: "9822455821",
+          email: "srd_mech@adcet.in"
+        },
+        student: {
+          name: "Arjun Patil", 
+          phone: "9876543210",
+          email: "arjunpatil@gmail.com"
+        }
+      }
     },
     {
       id: "cad-conqueror",
@@ -162,7 +216,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Mechanical Engineering",
       maxTeamSize: 1,
       entryFee: 100,
-      description: "Showcase your CAD modeling skills in this individual competition"
+      image: "/Cad_Conquer.png",
+      description: "Showcase your 3D modeling and CAD design skills in this intensive individual competition. Create complex mechanical components and assemblies using industry-standard software like SolidWorks or CATIA under time pressure."
       ,
       rules: [
         "Individual participation only. If entries exceed 45 candidates, a pre-qualifier round will be conducted.",
@@ -173,7 +228,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "The task will be revealed during the event and the maximum time allowed per candidate is 1 hour.",
         "Exceeding the scheduled time may lead to the submission not being considered for evaluation.",
         "Final output must be submitted in PDF format to the event management team."
-      ]
+      ],
+      coordinators: {
+        faculty: {
+          name: "Mr. Suhas R. Deore",
+          phone: "9822455821",
+          email: "srd_mech@adcet.in"
+        },
+        student: {
+          name: "Arjun Patil", 
+          phone: "9876543210",
+          email: "arjunpatil@gmail.com"
+        }
+      }
     }
   ],
   electrical: [
@@ -183,7 +250,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Electrical Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Present cutting-edge research in electrical engineering",
+      image: "/paper_presentation.png",
+      description: "Present cutting-edge research in electrical engineering covering power electronics, renewable energy systems, smart grid technologies, and digital signal processing. Showcase innovative solutions for modern electrical challenges.",
       topics: [
         "Power Electronics and Drives",
         "Renewable Energy Systems",
@@ -194,7 +262,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Control Systems and Automation",
         "High Voltage Engineering"
     ],
-    rules: paperPresentationRules
+    rules: paperPresentationRules,
+    coordinators: {
+      faculty: {
+        name: "Mrs. Rutuja S Pawar",
+        phone: "9765317323",
+        email: "rutuja_elec@adcet.in"
+      },
+      student: {
+        name: "Ms. Samruddhi Patil",
+        phone: "9021681044",
+        email: "samruddhi@gmail.com"
+      }
+    }
     },
     {
       id: "circuit-builder",
@@ -202,7 +282,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Electrical Engineering",
       maxTeamSize: 2,
       entryFee: 100,
-      description: "Design and build functional circuits to solve engineering challenges"
+      image: "/Circuit_builder.png",
+      description: "Design and build functional electronic circuits to solve complex engineering challenges. Test your knowledge of electrical components, circuit analysis, and practical implementation skills in this hands-on competition."
       ,
       rules: [
         "Participants must carry valid college ID cards.",
@@ -222,7 +303,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Electrical Engineering",
       maxTeamSize: 2,
       entryFee: 100,
-      description: "Identify and fix electrical circuit problems under time pressure"
+      image: "/Troubleshooting.png",
+      description: "Identify and fix electrical circuit problems under intense time pressure. Test your analytical skills, circuit knowledge, and problem-solving abilities as you diagnose complex electrical faults in real-world scenarios."
       ,
       rules: [
         "Ten circuits will be provided during the event.",
@@ -244,7 +326,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Civil Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Present innovative solutions in civil engineering",
+      image: "/paper_presentation.png",
+      description: "Present innovative solutions in civil engineering including sustainable construction materials, smart cities infrastructure, earthquake-resistant design, and water resources management. Address modern urban development challenges.",
       topics: [
         "Sustainable Construction Materials",
         "Smart Cities and Infrastructure",
@@ -255,7 +338,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Structural Health Monitoring",
         "Green Building Technologies"
     ],
-    rules: paperPresentationRules
+    rules: paperPresentationRules,
+    coordinators: {
+      faculty: {
+        name: "Mr. Atul N. Kolekar",
+        phone: "9545428026",
+        email: "Ank_civil@adcet.in"
+      },
+      student: {
+        name: "Aman Attar",
+        phone: "9356709191",
+        email: "amanattar0303@gmail.com"
+      }
+    }
     },
     {
       id: "akruti",
@@ -263,7 +358,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Civil Engineering",
       maxTeamSize: 1,
       entryFee: 100,
-      description: "Individual structural design and analysis competition"
+      image: "/akruti.png",
+      description: "Individual structural design and analysis competition showcasing architectural and engineering excellence. Demonstrate your drafting skills, structural knowledge, and creative problem-solving in civil engineering design challenges."
       ,
       rules: [
         "Single participant per entry.",
@@ -282,7 +378,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Civil Engineering",
       maxTeamSize: 2,
       entryFee: 100,
-      description: "Bridge design and construction challenge"
+      image: "/setu.png",
+      description: "Bridge design and construction challenge testing engineering fundamentals and structural analysis. Build efficient load-bearing bridges using popsicle sticks and demonstrate your understanding of structural mechanics and design optimization."
       ,
       rules: [
         "Each team may have up to two members and must be registered students.",
@@ -304,7 +401,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Computer Science Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Present innovative computer science research and solutions",
+      image: "/paper_presentation.png",
+      description: "Present innovative computer science research covering artificial intelligence, blockchain technology, cloud computing, cybersecurity, data science, IoT, and mobile application development. Showcase cutting-edge technological solutions.",
       topics: [
         "Artificial Intelligence and Machine Learning",
         "Blockchain Technology",
@@ -315,7 +413,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Mobile Application Development",
         "Software Engineering and Agile Methodologies"
     ],
-    rules: paperPresentationRules
+    rules: paperPresentationRules,
+    coordinators: {
+      faculty: {
+        name: "Mr. Yogesh V. Koli",
+        phone: "9503265322",
+        email: "yvk_cse@adect.in"
+      },
+      student: {
+        name: "Mr. Zahoorahmad Sayyad",
+        phone: "8767354046",
+        email: "zahoor.adcet@gmail.com"
+      }
+    }
     },
     {
       id: "code-compete",
@@ -323,7 +433,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Computer Science Engineering",
       maxTeamSize: 1,
       entryFee: 100,
-      description: "Individual competitive programming challenge"
+      image: "/code_to_compete.png",
+      description: "Individual competitive programming challenge featuring algorithmic problem-solving and data structures. Test your coding skills through multiple rounds including MCQs and intensive programming tasks on HackerRank platform."
       ,
       rules: [
         "Contest has two rounds: Round 1 is 1 hour (MCQ), Round 2 is 2 hours (programming).",
@@ -343,7 +454,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Computer Science Engineering",
       maxTeamSize: 2,
       entryFee: 200,
-      description: "Present your startup business plan and pitch to judges"
+      image: "/b_plan.png",
+      description: "Present your innovative startup business plan and pitch your entrepreneurial ideas to industry experts. Showcase your business acumen, market analysis, and financial projections in this comprehensive business competition."
       ,
       rules: [
         "Maximum team size: 2 students per team.",
@@ -365,7 +477,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "AI & Data Science",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Present research on AI and data science applications",
+      image: "/paper_presentation.png",
+      description: "Present groundbreaking research on AI and data science applications including deep learning, natural language processing, computer vision, predictive analytics, and ethical AI. Explore the future of intelligent systems.",
       topics: [
         "Deep Learning and Neural Networks",
         "Natural Language Processing",
@@ -376,7 +489,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Ethical AI and Bias Mitigation",
         "Reinforcement Learning"
     ],
-    rules: paperPresentationRules
+    rules: paperPresentationRules,
+    coordinators: {
+      faculty: {
+        name: "Ms. Suvarna Dalvi",
+        phone: "9850785532",
+        email: "suvarna_dalvi@adect.in"
+      },
+      student: {
+        name: "Ms. Khushi Pardeshi",
+        phone: "8805439076",
+        email: "khushi.pardeshi@gmail.com"
+      }
+    }
     },
     {
       id: "bgmi-dominator",
@@ -384,7 +509,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "AI & Data Science",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Esports competition featuring BGMI battles"
+      image: "/Bgmi_dominator.png",
+      description: "Ultimate esports competition featuring intense Battlegrounds Mobile India (BGMI) battles. Form your squad and compete in strategic team-based gaming tournaments for the championship title and exciting prizes."
       ,
       rules: [
         "Players must join the room 10 minutes prior to match time.",
@@ -404,7 +530,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "AI & Data Science",
       maxTeamSize: 1,
       entryFee: 100,
-      description: "Individual coding challenge focusing on algorithms and data structures"
+      image: "/Coding_Compi.png",
+      description: "Individual coding challenge focusing on advanced algorithms and data structures. Solve complex programming problems across multiple rounds, testing your logical thinking, optimization skills, and coding proficiency under time constraints."
       ,
       rules: [
         "Contest has 3 rounds; problems are revealed at the start of each round.",
@@ -425,7 +552,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "IoT & Cyber Security",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Present innovations in IoT and cybersecurity",
+      image: "/paper_presentation.png",
+      description: "Present cutting-edge innovations in IoT and cybersecurity covering IoT security, blockchain integration, edge computing, industrial IoT, smart cities, threat detection, and digital forensics. Address modern security challenges.",
       topics: [
         "IoT Security and Privacy",
         "Blockchain in IoT",
@@ -436,7 +564,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Network Security and Firewalls",
         "Digital Forensics and Incident Response"
     ],
-    rules: paperPresentationRules
+    rules: paperPresentationRules,
+    coordinators: {
+      faculty: {
+        name: "Mr. Sujeet Shirke",
+        phone: "8805439076",
+        email: "sujeet_shirke@adect.in"
+      },
+      student: {
+        name: "Mr. Soham Jadhav",
+        phone: "9834526781",
+        email: "soham.jadhav@gmail.com"
+      }
+    }
     },
     {
       id: "ideathon",
@@ -444,7 +584,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "IoT & Cyber Security",
       maxTeamSize: 2,
       entryFee: 100,
-      description: "Brainstorm and pitch innovative IoT solutions"
+      image: "/Ideathon.png",
+      description: "Brainstorm and pitch innovative IoT solutions addressing real-world challenges. Develop creative technology concepts, create prototypes, and present your ideas to industry experts in this intensive innovation competition."
       ,
       rules: [
         "Teams may have up to 2 members; cross-department and cross-year teams allowed.",
@@ -463,7 +604,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "IoT & Cyber Security",
       maxTeamSize: 6,
       entryFee: 100,
-      description: "Indoor cricket tournament for tech enthusiasts"
+      image: "/box_cricket.png",
+      description: "Indoor cricket tournament for tech enthusiasts combining sports and technology. Form your team and compete in fast-paced 3-over matches, demonstrating teamwork, strategy, and athletic skills in this exciting recreational competition."
       ,
       rules: [
         "Each team shall consist of six players; a player may represent only one team.",
@@ -484,7 +626,8 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Business Administration",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Present business strategies and management concepts",
+      image: "/paper_presentation.png",
+      description: "Present innovative business strategies and management concepts covering digital marketing, sustainable practices, entrepreneurship, financial management, HR strategies, and corporate social responsibility. Explore modern business solutions.",
       topics: [
         "Digital Marketing and E-commerce",
         "Sustainable Business Practices",
@@ -504,12 +647,25 @@ export const eventsByDepartment: Record<string, Event[]> = {
   ],
   food: [
     {
-      id: "functional-food",
-      name: "Functional Food",
-      department: "Food Technology",
+      id: "food-paper",
+      name: "Paper Presentation",
+      department: "Food technology",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Develop innovative functional food products with health benefits"
+      image: "/paper_presentation.png",
+      description: "Develop innovative functional food products with enhanced health benefits and nutritional value. Design foods that go beyond basic nutrition, incorporating bioactive compounds and therapeutic properties for modern dietary needs.",
+      coordinators: {
+        faculty: {
+          name: "Dr. Priya Sharma",
+          phone: "9876543210",
+          email: "priya_food@adcet.in"
+        },
+        student: {
+          name: "Sneha Kulkarni",
+          phone: "8765432109",
+          email: "snehakulkarni@gmail.com"
+        }
+      }
     },
     {
       id: "product-development",
@@ -517,7 +673,20 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Food Technology",
       maxTeamSize: 4,
       entryFee: 100,
-      description: "Create and prototype new food products with market potential"
+      image: "/New_Product_Development.png",
+      description: "Create and prototype revolutionary new food products with commercial market potential. From concept to prototype, demonstrate innovation in food processing, packaging, preservation, and consumer appeal.",
+      coordinators: {
+        faculty: {
+          name: "Dr. Priya Sharma",
+          phone: "9876543210",
+          email: "priya_food@adcet.in"
+        },
+        student: {
+          name: "Sneha Kulkarni",
+          phone: "8765432109",
+          email: "snehakulkarni@gmail.com"
+        }
+      }
     }
   ]
 };

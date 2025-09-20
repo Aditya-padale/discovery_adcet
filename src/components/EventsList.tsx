@@ -1,10 +1,9 @@
 import { useState, memo } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Users, DollarSign, ArrowLeft, BookOpen } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Event, getEventsByDepartment } from "@/data/events";
 import { Department } from "./DepartmentGrid";
+import "./EventCard.css";
 
 interface EventsListProps {
   department: Department;
@@ -38,39 +37,29 @@ export const EventsList = memo(({ department, onBack, onEventSelect }: EventsLis
         {/* Events Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event, index) => (
-            <Card 
+            <article 
               key={event.id}
-              className="festival-card hover-float group cursor-pointer"
+              className="card"
               onClick={() => onEventSelect(event)}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardHeader>
-                <CardTitle className="text-xl font-bold group-hover:text-gradient transition-colors duration-300">
-                  {event.name}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground text-sm">
-                  {event.description || "Click to view detailed rules and information"}
-                </p>
-                
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary" className="flex items-center gap-1">
-                    <Users className="h-3 w-3" />
-                    Max {event.maxTeamSize} {event.maxTeamSize === 1 ? 'participant' : 'participants'}
-                  </Badge>
-                  <Badge variant="outline" className="flex items-center gap-1 text-primary border-primary/30">
-                    <DollarSign className="h-3 w-3" />
-                    ₹{event.entryFee}/- per participant
-                  </Badge>
+              <img
+                className="card__background"
+                src={event.image || "/placeholder.svg"}
+                alt={`${event.name} event`}
+                width="1920"
+                height="2193"
+              />
+                            <div className="card__content | flow">
+                <div className="card__content--container | flow">
+                  <h2 className="card__title">{event.name}</h2>
+                  <p className="card__description">
+                    {event.description || "Click to view detailed rules and information"}
+                  </p>
                 </div>
-
-                <Button variant="festival" className="w-full group-hover:bg-primary/30">
-                  <BookOpen className="h-4 w-4 mr-2" />
-                  View Rules
-                </Button>
-              </CardContent>
-            </Card>
+                <button className="card__button">View Details</button>
+              </div>
+            </article>
           ))}
         </div>
       </div>
