@@ -1,26 +1,86 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Trophy, Users, UserPlus } from "lucide-react";
-import Galaxy from "./Galaxy";
+import { memo, useState, useEffect, lazy, Suspense, useCallback } from "react";
+import { PerformanceToggle } from "./PerformanceToggle";
+
+// Lazy load Galaxy component
+const Galaxy = lazy(() => import("./Galaxy"));
 
 interface HeroSectionProps {
   onExploreEvents: () => void;
   onRegister?: () => void;
 }
 
-export const HeroSection = ({ onExploreEvents, onRegister }: HeroSectionProps) => {
+export const HeroSection = memo(({ onExploreEvents, onRegister }: HeroSectionProps) => {
+  const [showGalaxy, setShowGalaxy] = useState(false);
+  const [isHighPerformance, setIsHighPerformance] = useState(true);
+
+  const handlePerformanceToggle = useCallback((enabled: boolean) => {
+    setIsHighPerformance(enabled);
+    if (enabled && !showGalaxy) {
+      setTimeout(() => setShowGalaxy(true), 500);
+    } else if (!enabled) {
+      setShowGalaxy(false);
+    }
+  }, [showGalaxy]);
+
+  useEffect(() => {
+    // Check device performance capabilities
+    const checkPerformance = () => {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      
+      if (!gl) {
+        setIsHighPerformance(false);
+        return;
+      }
+
+      // More strict performance checks
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const hasLowRAM = (navigator as any).deviceMemory && (navigator as any).deviceMemory < 6; // Increased threshold
+      const hasLowCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 6; // Increased threshold  
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isLowBandwidth = (navigator as any).connection && (navigator as any).connection.effectiveType === 'slow-2g';
+      
+      // Check for integrated graphics (Intel) - simplified check
+      const isWebGLSupported = !!gl;
+      
+      if (isMobile || hasLowRAM || hasLowCPU || prefersReducedMotion || isLowBandwidth || !isWebGLSupported) {
+        setIsHighPerformance(false);
+      } else {
+        setIsHighPerformance(true);
+        // Longer delay for Galaxy loading to ensure page is fully loaded
+        setTimeout(() => setShowGalaxy(true), 2000);
+      }
+    };
+
+    checkPerformance();
+  }, []);
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Galaxy Background */}
+      {/* Performance Toggle */}
+      <PerformanceToggle onToggle={handlePerformanceToggle} initialState={isHighPerformance} />
+      
+      {/* Galaxy Background - Conditional for performance */}
       <div className="absolute inset-0 z-0">
-        <Galaxy 
-          mouseRepulsion={true}
-          mouseInteraction={true}
-          density={1.5}
-          glowIntensity={0.5}
-          saturation={0.8}
-          hueShift={240}
-          transparent={false}
-        />
+        {isHighPerformance && showGalaxy ? (
+          <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-background via-primary/5 to-secondary/10" />}>
+            <Galaxy 
+              mouseRepulsion={true}
+              mouseInteraction={true}
+              density={0.8}
+              glowIntensity={0.2}
+              saturation={0.4}
+              hueShift={240}
+              transparent={false}
+              speed={0.5}
+              rotationSpeed={0.05}
+            />
+          </Suspense>
+        ) : (
+          /* Fallback gradient background for low-performance devices */
+          <div className="w-full h-full bg-gradient-to-br from-background via-primary/5 to-secondary/10" />
+        )}
       </div>
       
       {/* Overlay for better text readability */}
@@ -98,11 +158,11 @@ export const HeroSection = ({ onExploreEvents, onRegister }: HeroSectionProps) =
         </div>
       </div>
       
-      {/* Floating geometric elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-lg animate-float z-15" style={{ animationDelay: '0s' }} />
+      {/* Floating geometric elements - disabled for better performance */}
+      {/* <div className="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-lg animate-float z-15" style={{ animationDelay: '0s' }} />
       <div className="absolute top-40 right-20 w-16 h-16 bg-secondary/20 rounded-full animate-float z-15" style={{ animationDelay: '1s' }} />
       <div className="absolute bottom-32 left-20 w-12 h-12 bg-accent/20 rotate-45 animate-float z-15" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-20 right-10 w-24 h-24 bg-neon-orange/20 rounded-lg animate-float z-15" style={{ animationDelay: '0.5s' }} />
+      <div className="absolute bottom-20 right-10 w-24 h-24 bg-neon-orange/20 rounded-lg animate-float z-15" style={{ animationDelay: '0.5s' }} /> */}
     </section>
   );
-};
+});

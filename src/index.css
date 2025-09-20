@@ -115,7 +115,29 @@
   }
   
   .hover-float {
-    @apply transition-transform duration-300 hover:-translate-y-2 hover:scale-[1.02];
+    @apply transition-transform duration-300;
+  }
+  
+  /* Reduce animations for users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hover-float {
+      @apply transition-none;
+    }
+    
+    .animate-fade-in,
+    .animate-slide-in-left,
+    .animate-slide-in-right,
+    .animate-scale-in,
+    .animate-float {
+      animation: none !important;
+    }
+  }
+  
+  /* Only enable hover effects on non-touch devices for better performance */
+  @media (hover: hover) {
+    .hover-float:hover {
+      @apply -translate-y-2 scale-[1.02];
+    }
   }
 }
 

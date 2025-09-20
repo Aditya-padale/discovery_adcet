@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
 import { DepartmentGrid, Department } from "@/components/DepartmentGrid";
@@ -17,40 +17,40 @@ type ViewState =
   | { type: 'event-details'; event: Event }
   | { type: 'registration'; event?: Event };
 
-const Index = () => {
+const Index = memo(() => {
   const [currentView, setCurrentView] = useState<ViewState>({ type: 'home' });
 
-  const handleExploreEvents = () => {
+  const handleExploreEvents = useCallback(() => {
     const departmentsSection = document.getElementById('departments');
     departmentsSection?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
-  const handleDepartmentSelect = (department: Department) => {
+  const handleDepartmentSelect = useCallback((department: Department) => {
     setCurrentView({ type: 'events', department });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
-  const handleEventSelect = (event: Event) => {
+  const handleEventSelect = useCallback((event: Event) => {
     setCurrentView({ type: 'event-details', event });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
-  const handleEventRegister = (event?: Event) => {
+  const handleEventRegister = useCallback((event?: Event) => {
     setCurrentView({ type: 'registration', event });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
-  const handleGeneralRegister = () => {
+  const handleGeneralRegister = useCallback(() => {
     const registrationSection = document.getElementById('registration');
     registrationSection?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
-  const handleBackToHome = () => {
+  const handleBackToHome = useCallback(() => {
     setCurrentView({ type: 'home' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
-  const handleNavigation = (section: string) => {
+  const handleNavigation = useCallback((section: string) => {
     if (section === 'home') {
       handleBackToHome();
     } else {
@@ -71,9 +71,9 @@ const Index = () => {
         }
       }
     }
-  };
+  }, [currentView.type, handleBackToHome]);
 
-  const handleBackToEvents = () => {
+  const handleBackToEvents = useCallback(() => {
     if (currentView.type === 'event-details' || currentView.type === 'registration') {
       // Get the department from the event to go back to the right events list
       const event = currentView.event;
@@ -154,7 +154,7 @@ const Index = () => {
       }
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, [currentView, handleBackToHome]);
 
   if (currentView.type === 'registration') {
     return (
@@ -218,6 +218,6 @@ const Index = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Index;

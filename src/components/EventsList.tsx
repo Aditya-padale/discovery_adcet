@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +12,7 @@ interface EventsListProps {
   onEventSelect: (event: Event) => void;
 }
 
-export const EventsList = ({ department, onBack, onEventSelect }: EventsListProps) => {
+export const EventsList = memo(({ department, onBack, onEventSelect }: EventsListProps) => {
   const events = getEventsByDepartment(department.id);
 
   return (
@@ -76,4 +76,4 @@ export const EventsList = ({ department, onBack, onEventSelect }: EventsListProp
       </div>
     </section>
   );
-};
+});
