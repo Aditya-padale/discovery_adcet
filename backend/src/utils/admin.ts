@@ -176,6 +176,7 @@ export const exportRegistrationsExcel = async (req: AdminExportRequest, res: Res
     const excelData = registrations.map((reg, index) => {
       const baseData: any = {
         'Sr. No.': index + 1,
+        'Registration ID': reg.registrationId || 'N/A',
         'Registration Date': new Date(reg.createdAt).toLocaleDateString('en-IN'),
         'Leader Name': reg.leaderName,
         'Leader Email': reg.leaderEmail,

@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { 
   DownloadIcon, 
   SearchIcon, 
@@ -14,7 +15,8 @@ import {
   UsersIcon,
   TrendingUpIcon,
   IndianRupeeIcon,
-  CalendarIcon
+  CalendarIcon,
+  EyeIcon
 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import * as fileSaver from 'file-saver';
@@ -28,6 +30,7 @@ interface TeamMember {
 
 interface Registration {
   _id: string;
+  registrationId: number;
   leaderName: string;
   leaderEmail: string;
   leaderMobile: string;
@@ -107,10 +110,16 @@ const AdminPanel: React.FC = () => {
     if (savedToken) {
       setToken(savedToken);
       setIsAuthenticated(true);
+    }
+  }, []);
+
+  // Fetch data when token is set and user is authenticated
+  useEffect(() => {
+    if (isAuthenticated && token) {
       fetchRegistrations();
       fetchStats();
     }
-  }, []);
+  }, [isAuthenticated, token]);
 
   // Handle authentication
   const handleLogin = async () => {
@@ -150,8 +159,7 @@ const AdminPanel: React.FC = () => {
           description: "Logged in successfully!",
         });
         console.log('Login successful, fetching data...');
-        fetchRegistrations();
-        fetchStats();
+        // Data will be fetched automatically by useEffect when token is set
       } else {
         console.error('Login failed:', data.error);
         toast({
@@ -325,10 +333,10 @@ const AdminPanel: React.FC = () => {
 
   // Effect for fetching data when filters change
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && token) {
       fetchRegistrations();
     }
-  }, [eventFilter, sortBy, sortOrder, currentPage, searchTerm]);
+  }, [eventFilter, sortBy, sortOrder, currentPage, searchTerm, isAuthenticated, token]);
 
   // Login form
   if (!isAuthenticated) {
@@ -500,7 +508,7 @@ const AdminPanel: React.FC = () => {
                 <div className="relative">
                   <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Search registrations..."
+                    placeholder="Search by name, email, mobile, or reg ID..."
                     className="pl-10 w-full sm:w-80 bg-background/50 border-border/50 focus:border-primary/50"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -587,6 +595,7 @@ const AdminPanel: React.FC = () => {
                 <Table>
                   <TableHeader>
                     <TableRow>
+                      <TableHead>Reg. ID</TableHead>
                       <TableHead>Date</TableHead>
                       <TableHead>Leader Name</TableHead>
                       <TableHead>Email</TableHead>
@@ -595,6 +604,7 @@ const AdminPanel: React.FC = () => {
                       <TableHead>Event</TableHead>
                       <TableHead>Type</TableHead>
                       <TableHead>Team Size</TableHead>
+                      <TableHead>Team Details</TableHead>
                       <TableHead>Fee</TableHead>
                       <TableHead>Payment ID</TableHead>
                     </TableRow>
@@ -602,6 +612,9 @@ const AdminPanel: React.FC = () => {
                   <TableBody>
                     {registrations.map((registration) => (
                       <TableRow key={registration._id}>
+                        <TableCell className="font-medium text-blue-600">
+                          #{registration.registrationId}
+                        </TableCell>
                         <TableCell className="font-medium">
                           {new Date(registration.createdAt).toLocaleDateString('en-IN')}
                         </TableCell>
@@ -620,6 +633,77 @@ const AdminPanel: React.FC = () => {
                           </Badge>
                         </TableCell>
                         <TableCell>{registration.teamSize}</TableCell>
+                        <TableCell>
+                          {registration.participationType === 'team' && registration.teamMembers.length > 0 ? (
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                <Button variant="outline" size="sm" className="h-8 px-3">
+                                  <EyeIcon className="h-4 w-4 mr-1" />
+                                  View Team
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="max-w-2xl">
+                                <DialogHeader>
+                                  <DialogTitle className="flex items-center gap-2">
+                                    <UsersIcon className="h-5 w-5" />
+                                    Team Members - {registration.leaderName}'s Team
+                                  </DialogTitle>
+                                </DialogHeader>
+                                <div className="space-y-4">
+                                  <div className="bg-muted/50 p-4 rounded-lg">
+                                    <h4 className="font-semibold text-sm text-muted-foreground mb-2">Team Leader</h4>
+                                    <div className="grid grid-cols-2 gap-4 text-sm">
+                                      <div>
+                                        <span className="font-medium">Name:</span> {registration.leaderName}
+                                      </div>
+                                      <div>
+                                        <span className="font-medium">Email:</span> {registration.leaderEmail}
+                                      </div>
+                                      <div>
+                                        <span className="font-medium">Mobile:</span> {registration.leaderMobile}
+                                      </div>
+                                      <div>
+                                        <span className="font-medium">College:</span> {registration.leaderCollege}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {registration.teamMembers.length > 0 && (
+                                    <div>
+                                      <h4 className="font-semibold text-sm text-muted-foreground mb-3">Team Members ({registration.teamMembers.length})</h4>
+                                      <div className="space-y-3">
+                                        {registration.teamMembers.map((member, index) => (
+                                          <div key={index} className="border rounded-lg p-3 bg-card">
+                                            <div className="grid grid-cols-2 gap-3 text-sm">
+                                              <div>
+                                                <span className="font-medium">Name:</span> {member.name}
+                                              </div>
+                                              <div>
+                                                <span className="font-medium">Email:</span> {member.email}
+                                              </div>
+                                              <div>
+                                                <span className="font-medium">Mobile:</span> {member.mobile}
+                                              </div>
+                                              <div>
+                                                <span className="font-medium">College:</span> {member.college}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                  <div className="pt-2 text-xs text-muted-foreground">
+                                    Total Team Size: {registration.teamSize} members
+                                  </div>
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                          ) : (
+                            <Badge variant="secondary" className="text-xs">
+                              Solo
+                            </Badge>
+                          )}
+                        </TableCell>
                         <TableCell className="font-medium">₹{registration.totalFee}</TableCell>
                         <TableCell className="text-xs font-mono">{registration.paymentId}</TableCell>
                       </TableRow>

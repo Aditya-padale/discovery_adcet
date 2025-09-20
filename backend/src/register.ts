@@ -51,6 +51,7 @@ export async function connectToMongoDB(): Promise<typeof mongoose> {
 
 interface RegistrationDoc extends Document {
   _id: mongoose.Types.ObjectId;
+  registrationId: number;
   leaderName: string;
   leaderEmail: string;
   leaderMobile: string;
@@ -83,6 +84,7 @@ const teamMemberSchema = new Schema({
 });
 
 const registrationSchema = new Schema<RegistrationDoc>({
+  registrationId: { type: Number, unique: true },
   leaderName: { type: String, required: true },
   leaderEmail: { type: String, required: true },
   leaderMobile: { type: String, required: true },
@@ -103,6 +105,15 @@ const registrationSchema = new Schema<RegistrationDoc>({
 });
 
 export const Registration = mongoose.model<RegistrationDoc>('Registration', registrationSchema, 'registrations');
+
+// Function to get the next registration ID
+async function getNextRegistrationId(): Promise<number> {
+  const lastRegistration = await Registration.findOne({}, {}, { sort: { 'registrationId': -1 } });
+  if (!lastRegistration || !lastRegistration.registrationId) {
+    return 1001; // Start from 1001 for easy identification
+  }
+  return lastRegistration.registrationId + 1;
+}
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
@@ -161,7 +172,13 @@ export const registerUser = async (req: Request, res: Response) => {
       totalFee: Number(totalFee)
     };
     
-    const registration = new Registration(normalizedData);
+    // Generate next registration ID
+    const registrationId = await getNextRegistrationId();
+    
+    const registration = new Registration({
+      ...normalizedData,
+      registrationId
+    });
     let saved: RegistrationDoc | undefined;
     
     for (let attempt = 1; attempt <= 3; attempt++) {
@@ -182,7 +199,7 @@ export const registerUser = async (req: Request, res: Response) => {
     // Send welcome email
     await sendWelcomeEmail(
       saved.leaderEmail,
-      saved._id.toString(),
+      saved.registrationId.toString(),
       saved.leaderName,
       saved.leaderYear,
       saved.leaderMobile,
