@@ -150,4 +150,8 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary/70;
   }
+  
+  .z-15 {
+    z-index: 15;
+  }
 }

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Trophy, Users, UserPlus } from "lucide-react";
-import heroBackground from "@/assets/hero-bg.jpg";
+import Galaxy from "./Galaxy";
 
 interface HeroSectionProps {
   onExploreEvents: () => void;
@@ -10,25 +10,24 @@ interface HeroSectionProps {
 export const HeroSection = ({ onExploreEvents, onRegister }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${heroBackground})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      />
+      {/* Galaxy Background */}
+      <div className="absolute inset-0 z-0">
+        <Galaxy 
+          mouseRepulsion={true}
+          mouseInteraction={true}
+          density={1.5}
+          glowIntensity={0.5}
+          saturation={0.8}
+          hueShift={240}
+          transparent={false}
+        />
+      </div>
       
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-background/60 z-10" />
-      
-      {/* Animated geometric shapes */}
-      <div className="absolute inset-0 hero-pattern z-20" />
+      <div className="absolute inset-0 bg-black/10 z-10" />
       
       {/* Main content */}
-      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="animate-fade-in">
           {/* Main Title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight">
@@ -100,10 +99,10 @@ export const HeroSection = ({ onExploreEvents, onRegister }: HeroSectionProps) =
       </div>
       
       {/* Floating geometric elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-lg animate-float" style={{ animationDelay: '0s' }} />
-      <div className="absolute top-40 right-20 w-16 h-16 bg-secondary/20 rounded-full animate-float" style={{ animationDelay: '1s' }} />
-      <div className="absolute bottom-32 left-20 w-12 h-12 bg-accent/20 rotate-45 animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute bottom-20 right-10 w-24 h-24 bg-neon-orange/20 rounded-lg animate-float" style={{ animationDelay: '0.5s' }} />
+      <div className="absolute top-20 left-10 w-20 h-20 bg-primary/20 rounded-lg animate-float z-15" style={{ animationDelay: '0s' }} />
+      <div className="absolute top-40 right-20 w-16 h-16 bg-secondary/20 rounded-full animate-float z-15" style={{ animationDelay: '1s' }} />
+      <div className="absolute bottom-32 left-20 w-12 h-12 bg-accent/20 rotate-45 animate-float z-15" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-20 right-10 w-24 h-24 bg-neon-orange/20 rounded-lg animate-float z-15" style={{ animationDelay: '0.5s' }} />
     </section>
   );
 };

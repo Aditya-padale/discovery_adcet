@@ -8,6 +8,7 @@ import { ScheduleSection } from "@/components/ScheduleSection";
 import { RegistrationSection } from "@/components/RegistrationSection";
 import { ContactSection } from "@/components/ContactSection";
 import { RegistrationForm } from "@/components/RegistrationForm";
+import { FloatingNavbar } from "@/components/FloatingNavbar";
 import { Event } from "@/data/events";
 
 type ViewState = 
@@ -47,6 +48,29 @@ const Index = () => {
   const handleBackToHome = () => {
     setCurrentView({ type: 'home' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigation = (section: string) => {
+    if (section === 'home') {
+      handleBackToHome();
+    } else {
+      // Ensure we're on the home view first
+      if (currentView.type !== 'home') {
+        setCurrentView({ type: 'home' });
+        // Wait for the view to change, then scroll
+        setTimeout(() => {
+          const element = document.getElementById(section);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        const element = document.getElementById(section);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
   };
 
   const handleBackToEvents = () => {
@@ -134,44 +158,64 @@ const Index = () => {
 
   if (currentView.type === 'registration') {
     return (
-      <RegistrationForm 
-        eventTitle={currentView.event?.name}
-        onBack={currentView.event ? handleBackToEvents : handleBackToHome}
-      />
+      <div>
+        <FloatingNavbar onNavigate={handleNavigation} />
+        <RegistrationForm 
+          eventTitle={currentView.event?.name}
+          onBack={currentView.event ? handleBackToEvents : handleBackToHome}
+        />
+      </div>
     );
   }
 
   if (currentView.type === 'events') {
     return (
-      <EventsList 
-        department={currentView.department}
-        onBack={handleBackToHome}
-        onEventSelect={handleEventSelect}
-      />
+      <div>
+        <FloatingNavbar onNavigate={handleNavigation} />
+        <EventsList 
+          department={currentView.department}
+          onBack={handleBackToHome}
+          onEventSelect={handleEventSelect}
+        />
+      </div>
     );
   }
 
   if (currentView.type === 'event-details') {
     return (
-      <EventDetails 
-        event={currentView.event}
-        onBack={handleBackToEvents}
-        onRegister={() => handleEventRegister(currentView.event)}
-      />
+      <div>
+        <FloatingNavbar onNavigate={handleNavigation} />
+        <EventDetails 
+          event={currentView.event}
+          onBack={handleBackToEvents}
+          onRegister={() => handleEventRegister(currentView.event)}
+        />
+      </div>
     );
   }
 
   return (
     <div className="min-h-screen">
-      <HeroSection 
-        onExploreEvents={handleExploreEvents} 
-        onRegister={handleGeneralRegister}
-      />
-      <AboutSection />
-      <DepartmentGrid onDepartmentSelect={handleDepartmentSelect} />
+      <FloatingNavbar onNavigate={handleNavigation} />
+      <div id="home">
+        <HeroSection 
+          onExploreEvents={handleExploreEvents} 
+          onRegister={handleGeneralRegister}
+        />
+      </div>
+      <div id="about">
+        <AboutSection />
+      </div>
+      <div id="events">
+        <DepartmentGrid onDepartmentSelect={handleDepartmentSelect} />
+      </div>
       <ScheduleSection />
-      <RegistrationSection />
-      <ContactSection />
+      <div id="registration">
+        <RegistrationSection />
+      </div>
+      <div id="contact">
+        <ContactSection />
+      </div>
     </div>
   );
 };
