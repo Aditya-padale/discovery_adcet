@@ -5,6 +5,13 @@ import { registerUser } from './register';
 import { checkDuplicate } from './search';
 import { orderRazorpay } from './utils/razorpay';
 import { verifyPayment } from './utils/payment-verification';
+import { 
+  adminLogin, 
+  authenticateAdmin, 
+  getAllRegistrations, 
+  exportRegistrationsExcel, 
+  getRegistrationStats 
+} from './utils/admin';
 import path from 'path';
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -16,7 +23,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? ['https://yourdomain.com'] // Replace with your production domain
-    : ['http://localhost:8080', 'http://localhost:8081', 'http://localhost:3000'],
+    : ['http://localhost:8080', 'http://localhost:8081', 'http://localhost:8082', 'http://localhost:3000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -39,6 +46,12 @@ app.get('/', (req, res) => {
 app.post('/api/register', checkDuplicate, verifyPayment, registerUser);
 app.post('/api/order', orderRazorpay);
 app.post('/api/payment-verification', verifyPayment);
+
+// Admin Routes
+app.post('/api/admin/login', adminLogin);
+app.get('/api/admin/registrations', authenticateAdmin, getAllRegistrations);
+app.get('/api/admin/export', authenticateAdmin, exportRegistrationsExcel);
+app.get('/api/admin/stats', authenticateAdmin, getRegistrationStats);
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
