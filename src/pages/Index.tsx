@@ -5,9 +5,9 @@ import { DepartmentGrid, Department } from "@/components/DepartmentGrid";
 import { EventsList } from "@/components/EventsList";
 import { EventDetails } from "@/components/EventDetails";
 import { ScheduleSection } from "@/components/ScheduleSection";
-import { RegistrationSection } from "@/components/RegistrationSection";
 import { ContactSection } from "@/components/ContactSection";
 import { RegistrationForm } from "@/components/RegistrationForm";
+import Registration from "@/pages/Registration";
 import { FloatingNavbar } from "@/components/FloatingNavbar";
 import { Event } from "@/data/events";
 
@@ -41,8 +41,8 @@ const Index = memo(() => {
   }, []);
 
   const handleGeneralRegister = useCallback(() => {
-    const registrationSection = document.getElementById('registration');
-    registrationSection?.scrollIntoView({ behavior: 'smooth' });
+    setCurrentView({ type: 'registration' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const handleBackToHome = useCallback(() => {
@@ -53,6 +53,9 @@ const Index = memo(() => {
   const handleNavigation = useCallback((section: string) => {
     if (section === 'home') {
       handleBackToHome();
+    } else if (section === 'registration') {
+      setCurrentView({ type: 'registration' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // Ensure we're on the home view first
       if (currentView.type !== 'home') {
@@ -160,7 +163,7 @@ const Index = memo(() => {
     return (
       <div>
         <FloatingNavbar onNavigate={handleNavigation} />
-        <RegistrationForm 
+        <Registration 
           eventTitle={currentView.event?.name}
           onBack={currentView.event ? handleBackToEvents : handleBackToHome}
         />
@@ -210,9 +213,6 @@ const Index = memo(() => {
         <DepartmentGrid onDepartmentSelect={handleDepartmentSelect} />
       </div>
       <ScheduleSection />
-      <div id="registration">
-        <RegistrationSection />
-      </div>
       <div id="contact">
         <ContactSection />
       </div>
