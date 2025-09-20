@@ -7,7 +7,6 @@ import { EventDetails } from "@/components/EventDetails";
 import { ScheduleSection } from "@/components/ScheduleSection";
 import { ContactSection } from "@/components/ContactSection";
 import { RegistrationForm } from "@/components/RegistrationForm";
-import Registration from "@/pages/Registration";
 import { FloatingNavbar } from "@/components/FloatingNavbar";
 import { Event } from "@/data/events";
 
@@ -163,7 +162,7 @@ const Index = memo(() => {
     return (
       <div>
         <FloatingNavbar onNavigate={handleNavigation} />
-        <Registration 
+        <RegistrationForm 
           eventTitle={currentView.event?.name}
           onBack={currentView.event ? handleBackToEvents : handleBackToHome}
         />

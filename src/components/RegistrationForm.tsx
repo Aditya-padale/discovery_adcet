@@ -194,7 +194,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex items-center justify-center p-4">
+      <div className="min-h-screen flex items-center justify-center p-4">
         <Card className="w-full max-w-md text-center">
           <CardContent className="pt-6">
             <CheckCircle className="mx-auto h-16 w-16 text-green-500 mb-4" />
@@ -228,7 +228,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-8 px-4">
+    <div className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <Card>
           <CardHeader className="text-center">
