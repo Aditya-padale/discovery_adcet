@@ -22,8 +22,8 @@ const teamMemberSchema = z.object({
   college: z.string().min(2, "Please enter college name"),
 });
 
-// Main registration schema
-const registrationSchema = z.object({
+// Function to create dynamic registration schema based on event
+const createRegistrationSchema = (maxTeamSize: number = 4) => z.object({
   // Leader details
   leaderName: z.string().min(2, "Name must be at least 2 characters"),
   leaderCollege: z.string().min(2, "Please enter your college name"),
@@ -41,13 +41,16 @@ const registrationSchema = z.object({
   participationType: z.enum(["solo", "team"], {
     required_error: "Please select participation type",
   }),
-  teamSize: z.number().min(1).max(4).optional(),
+  teamSize: z.number().min(1).max(maxTeamSize).optional(),
   
   // Team members (conditional)
   teamMembers: z.array(teamMemberSchema).optional(),
 });
 
-type RegistrationFormValues = z.infer<typeof registrationSchema>;
+// Default schema
+const defaultRegistrationSchema = createRegistrationSchema();
+
+type RegistrationFormValues = z.infer<typeof defaultRegistrationSchema>;
 
 const departments = [
   "Aeronautical Engineering",
@@ -81,8 +84,13 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
 
   const allEvents = getAllEvents();
 
+  // Create dynamic schema based on selected event
+  const currentSchema = selectedEvent 
+    ? createRegistrationSchema(selectedEvent.maxTeamSize)
+    : defaultRegistrationSchema;
+
   const form = useForm<RegistrationFormValues>({
-    resolver: zodResolver(registrationSchema),
+    resolver: zodResolver(currentSchema),
     defaultValues: {
       leaderName: "",
       leaderCollege: "",
@@ -146,20 +154,67 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
     if (!isPaperPresentation) {
       form.setValue("paperPresentationDept", "");
     }
+
+    // Handle participation type based on event's maxTeamSize
+    if (event) {
+      if (event.maxTeamSize === 1) {
+        // Force solo participation for events with maxTeamSize 1
+        setParticipationType("solo");
+        form.setValue("participationType", "solo");
+        setTeamSize(1);
+        form.setValue("teamSize", 1);
+      } else {
+        // Reset team size if current size exceeds event's max
+        if (teamSize > event.maxTeamSize) {
+          const newTeamSize = Math.min(teamSize, event.maxTeamSize);
+          setTeamSize(newTeamSize);
+          form.setValue("teamSize", newTeamSize);
+          
+          // If in team mode, ensure we don't exceed max
+          if (participationType === "team" && newTeamSize < 2) {
+            setParticipationType("solo");
+            form.setValue("participationType", "solo");
+            setTeamSize(1);
+            form.setValue("teamSize", 1);
+          }
+        }
+      }
+    }
   };
 
   const handleParticipationTypeChange = (type: "solo" | "team") => {
+    // Don't allow team participation for events with maxTeamSize 1
+    if (type === "team" && selectedEvent?.maxTeamSize === 1) {
+      toast({
+        title: "Team participation not allowed",
+        description: "This event only allows solo participation.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setParticipationType(type);
     form.setValue("participationType", type);
     
     if (type === "solo") {
       setTeamSize(1);
     } else {
-      setTeamSize(2); // Default to 2 members for team
+      // Set default team size to 2, but respect event's maxTeamSize
+      const defaultTeamSize = selectedEvent ? Math.min(2, selectedEvent.maxTeamSize) : 2;
+      setTeamSize(defaultTeamSize);
     }
   };
 
   const handleTeamSizeChange = (size: number) => {
+    // Validate against event's maxTeamSize
+    if (selectedEvent && size > selectedEvent.maxTeamSize) {
+      toast({
+        title: "Team size too large",
+        description: `This event allows maximum ${selectedEvent.maxTeamSize} team members.`,
+        variant: "destructive",
+      });
+      return;
+    }
     setTeamSize(size);
   };
 
@@ -474,9 +529,21 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
                                 </Label>
                               </div>
                               <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="team" id="team" />
-                                <Label htmlFor="team" className="cursor-pointer">
+                                <RadioGroupItem 
+                                  value="team" 
+                                  id="team" 
+                                  disabled={selectedEvent?.maxTeamSize === 1}
+                                />
+                                <Label 
+                                  htmlFor="team" 
+                                  className={`cursor-pointer ${selectedEvent?.maxTeamSize === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                >
                                   Team (₹100 per member)
+                                  {selectedEvent?.maxTeamSize === 1 && (
+                                    <span className="text-xs text-muted-foreground block">
+                                      Not available for this event
+                                    </span>
+                                  )}
                                 </Label>
                               </div>
                             </RadioGroup>
@@ -486,23 +553,29 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
                       )}
                     />
 
-                    {participationType === "team" && (
+                    {participationType === "team" && selectedEvent && (
                       <div className="space-y-4">
                         <div>
                           <Label className="text-sm font-medium">Select Team Size *</Label>
-                          <div className="flex gap-2 mt-2">
-                            {[2, 3, 4].map((size) => (
+                          <div className="flex gap-2 mt-2 flex-wrap">
+                            {Array.from({ length: selectedEvent.maxTeamSize - 1 }, (_, i) => i + 2).map((size) => (
                               <Button
                                 key={size}
                                 type="button"
                                 variant={teamSize === size ? "default" : "outline"}
                                 size="sm"
                                 onClick={() => handleTeamSizeChange(size)}
+                                disabled={size > selectedEvent.maxTeamSize}
                               >
                                 {size} Members (₹{size * 100})
                               </Button>
                             ))}
                           </div>
+                          {selectedEvent.maxTeamSize === 1 && (
+                            <p className="text-sm text-muted-foreground mt-2">
+                              This event only allows solo participation.
+                            </p>
+                          )}
                         </div>
                       </div>
                     )}
