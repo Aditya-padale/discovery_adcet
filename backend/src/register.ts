@@ -113,6 +113,30 @@ export const registerUser = async (req: Request, res: Response) => {
       participationType, teamSize, teamMembers, paymentId, orderId, signature, totalFee
     } = req.body;
     
+    // Mandatory payment validation
+    if (!paymentId || !orderId || !signature) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Payment details are required. Registration cannot proceed without completing payment.' 
+      });
+    }
+
+    // Validate payment IDs format (basic check)
+    if (!paymentId.startsWith('pay_') || !orderId.startsWith('order_')) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Invalid payment details. Please complete payment through the authorized gateway.' 
+      });
+    }
+
+    // Validate total fee
+    if (!totalFee || totalFee <= 0) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Invalid fee amount. Registration requires payment.' 
+      });
+    }
+    
     const normalizedData = {
       leaderName: leaderName.trim(),
       leaderEmail: leaderEmail.trim().toLowerCase(),
