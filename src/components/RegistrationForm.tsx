@@ -265,29 +265,132 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
         }
       }
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      console.log("Registration Data:", {
-        ...values,
-        selectedEventDetails: finalEventDetails,
-        totalFee,
-        registrationDate: new Date().toISOString(),
+      const registrationData = {
+        leaderName: values.leaderName,
+        leaderEmail: values.leaderEmail,
+        leaderMobile: values.leaderMobile,
+        leaderCollege: values.leaderCollege,
+        leaderDepartment: values.leaderDepartment,
+        leaderYear: values.leaderYear,
+        leaderCity: values.leaderCity,
+        selectedEvent: finalEventDetails?.name || values.selectedEvent,
+        paperPresentationDept: values.paperPresentationDept || '',
+        participationType: values.participationType,
+        teamSize: values.teamSize || 1,
+        teamMembers: values.teamMembers || [],
+        totalFee
+      };
+
+      // Create Razorpay order
+      const orderRes = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          amount: totalFee * 100, // Convert to paise
+          currency: "INR", 
+          receipt: `receipt_${Date.now()}` 
+        })
       });
 
-      setIsSubmitted(true);
-      toast({
-        title: "Registration Successful!",
-        description: "Your registration has been submitted. You will receive a confirmation email shortly.",
+      const orderResult = await orderRes.json();
+      if (!orderResult.success) {
+        throw new Error('Order creation failed');
+      }
+
+      const orderId = orderResult.order?.id;
+      if (!orderId) {
+        throw new Error('Order creation failed');
+      }
+
+      // Razorpay payment options
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount: totalFee * 100,
+        currency: "INR",
+        name: "Discovery ADCET 2025",
+        description: `Registration for ${registrationData.selectedEvent}`,
+        image: "/temp_icon.png", // Your logo
+        order_id: orderId,
+        prefill: {
+          name: registrationData.leaderName,
+          email: registrationData.leaderEmail,
+          contact: registrationData.leaderMobile,
+        },
+        handler: async (razorpayResponse: any) => {
+          try {
+            // Submit registration after successful payment
+            const registerRes = await fetch("/api/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                ...registrationData,
+                paymentId: razorpayResponse.razorpay_payment_id,
+                orderId: razorpayResponse.razorpay_order_id,
+                signature: razorpayResponse.razorpay_signature
+              })
+            });
+
+            const result = await registerRes.json();
+            if (result.success) {
+              setIsSubmitted(true);
+              toast({
+                title: "Registration Successful!",
+                description: "Your registration has been submitted. You will receive a confirmation email shortly.",
+              });
+            } else {
+              toast({
+                title: "Registration Failed",
+                description: result.error || "There was an error submitting your registration.",
+                variant: "destructive",
+              });
+            }
+          } catch (err) {
+            console.error('Registration error:', err);
+            toast({
+              title: "Registration Failed",
+              description: "There was an error submitting your registration. Please try again.",
+              variant: "destructive",
+            });
+          } finally {
+            setIsSubmitting(false);
+          }
+        },
+        modal: {
+          ondismiss: () => {
+            setIsSubmitting(false);
+            toast({
+              title: "Payment Cancelled",
+              description: "You cancelled the payment. Please try again to complete registration.",
+              variant: "destructive",
+            });
+          }
+        },
+        theme: {
+          color: "#3b82f6"
+        }
+      };
+
+      // Create Razorpay instance and open payment modal
+      const razorpay = new (window as any).Razorpay(options);
+      razorpay.on('payment.failed', (response: any) => {
+        setIsSubmitting(false);
+        toast({
+          title: "Payment Failed",
+          description: response.error?.description || 'Payment failed. Please try again.',
+          variant: "destructive",
+        });
       });
+      
+      razorpay.open();
+      
     } catch (error) {
+      console.error('Error:', error);
+      setIsSubmitting(false);
       toast({
-        title: "Registration Failed",
-        description: "There was an error submitting your registration. Please try again.",
+        title: "Error",
+        description: "There was an error processing your request. Please try again.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
