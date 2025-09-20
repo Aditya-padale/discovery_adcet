@@ -23,7 +23,7 @@ const teamMemberSchema = z.object({
 });
 
 // Function to create dynamic registration schema based on event
-const createRegistrationSchema = (maxTeamSize: number = 4) => z.object({
+const createRegistrationSchema = (maxTeamSize: number = 4, isPaperPresentation: boolean = false) => z.object({
   // Leader details
   leaderName: z.string().min(2, "Name must be at least 2 characters"),
   leaderCollege: z.string().min(2, "Please enter your college name"),
@@ -35,7 +35,9 @@ const createRegistrationSchema = (maxTeamSize: number = 4) => z.object({
   
   // Event selection
   selectedEvent: z.string().min(1, "Please select an event"),
-  paperPresentationDept: z.string().optional(),
+  paperPresentationDept: isPaperPresentation 
+    ? z.string().min(1, "Please select a department for paper presentation")
+    : z.string().optional(),
   
   // Team details
   participationType: z.enum(["solo", "team"], {
@@ -65,6 +67,18 @@ const departments = [
   "Other"
 ];
 
+// Departments that have paper presentation events
+const paperPresentationDepartments = [
+  "Aeronautical Engineering",
+  "Mechanical Engineering", 
+  "Electrical Engineering",
+  "Civil Engineering",
+  "Computer Science Engineering",
+  "AI & Data Science",
+  "IoT & Cyber Security",
+  "Business Administration"
+];
+
 const years = ["1st Year", "2nd Year", "3rd Year", "4th Year", "Graduate", "Post Graduate"];
 
 interface RegistrationFormProps {
@@ -84,9 +98,27 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
 
   const allEvents = getAllEvents();
 
+  // Filter events to show only one Paper Presentation option
+  const filteredEvents = allEvents.filter((event, index, arr) => {
+    if (event.name === "Paper Presentation") {
+      // Only show the first Paper Presentation event
+      return arr.findIndex(e => e.name === "Paper Presentation") === index;
+    }
+    return true;
+  }).map(event => {
+    // Rename the Paper Presentation to be generic
+    if (event.name === "Paper Presentation") {
+      return {
+        ...event,
+        department: "All Departments"
+      };
+    }
+    return event;
+  });
+
   // Create dynamic schema based on selected event
   const currentSchema = selectedEvent 
-    ? createRegistrationSchema(selectedEvent.maxTeamSize)
+    ? createRegistrationSchema(selectedEvent.maxTeamSize, selectedEvent.name === "Paper Presentation")
     : defaultRegistrationSchema;
 
   const form = useForm<RegistrationFormValues>({
@@ -221,12 +253,24 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
   const onSubmit = async (values: RegistrationFormValues) => {
     setIsSubmitting(true);
     try {
+      // If Paper Presentation is selected, find the correct event based on department
+      let finalEventDetails = selectedEvent;
+      if (selectedEvent?.name === "Paper Presentation" && values.paperPresentationDept) {
+        const paperPresentationEvent = allEvents.find(event => 
+          event.name === "Paper Presentation" && 
+          event.department === values.paperPresentationDept
+        );
+        if (paperPresentationEvent) {
+          finalEventDetails = paperPresentationEvent;
+        }
+      }
+
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       console.log("Registration Data:", {
         ...values,
-        selectedEventDetails: selectedEvent,
+        selectedEventDetails: finalEventDetails,
         totalFee,
         registrationDate: new Date().toISOString(),
       });
@@ -455,7 +499,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent className="max-h-60">
-                              {allEvents.map((event) => (
+                              {filteredEvents.map((event) => (
                                 <SelectItem key={event.id} value={event.id}>
                                   <div className="flex flex-col">
                                     <span className="font-medium">{event.name}</span>
@@ -484,7 +528,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
-                                {departments.filter(dept => dept !== "Other").map((dept) => (
+                                {paperPresentationDepartments.map((dept) => (
                                   <SelectItem key={dept} value={dept}>
                                     {dept}
                                   </SelectItem>
