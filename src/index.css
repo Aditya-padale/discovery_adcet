@@ -117,6 +117,31 @@
   .hover-float {
     @apply transition-transform duration-300;
   }
+
+  /* New minimalistic about section utilities */
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .glassmorphism {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .minimal-gradient-text {
+    @apply bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent;
+  }
+
+  .subtle-glow {
+    box-shadow: 0 0 50px rgba(34, 211, 238, 0.15);
+  }
   
   /* Reduce animations for users who prefer reduced motion */
   @media (prefers-reduced-motion: reduce) {
