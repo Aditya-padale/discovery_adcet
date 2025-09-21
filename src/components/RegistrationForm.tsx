@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CheckCircle, UserPlus, Award, IndianRupee, Users, User, Trash2 } from "lucide-react";
 import { getAllEvents, type Event } from "@/data/events";
+import { Footer } from "@/components/Footer";
 
 // Team member schema
 const teamMemberSchema = z.object({
@@ -84,9 +85,10 @@ const years = ["1st Year", "2nd Year", "3rd Year", "4th Year", "Graduate", "Post
 interface RegistrationFormProps {
   eventTitle?: string;
   onBack?: () => void;
+  showFooter?: boolean;
 }
 
-export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) => {
+export const RegistrationForm = ({ eventTitle, onBack, showFooter = true }: RegistrationFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -430,8 +432,8 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
   }
 
   return (
-    <div className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 flex flex-col">
+      <div className="max-w-3xl mx-auto flex-1">
         <Card>
           <CardHeader className="text-center">
             <div className="flex items-center justify-center mb-4">
@@ -883,6 +885,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
           </CardContent>
         </Card>
       </div>
+      {showFooter && <Footer />}
     </div>
   );
 };

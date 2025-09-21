@@ -7,6 +7,7 @@ import { EventDetails } from "@/components/EventDetails";
 import { ContactSection } from "@/components/ContactSection";
 import { RegistrationForm } from "@/components/RegistrationForm";
 import { FloatingNavbar } from "@/components/FloatingNavbar";
+import { Footer } from "@/components/Footer";
 import { Event } from "@/data/events";
 
 type ViewState = 
@@ -141,44 +142,48 @@ const Index = memo(() => {
 
   if (currentView.type === 'registration') {
     return (
-      <div>
+      <div className="min-h-screen flex flex-col">
         <FloatingNavbar onNavigate={handleNavigation} />
         <RegistrationForm 
           eventTitle={currentView.event?.name}
           onBack={currentView.event ? handleBackToEvents : handleBackToHome}
+          showFooter={false}
         />
+        <Footer />
       </div>
     );
   }
 
   if (currentView.type === 'events') {
     return (
-      <div>
+      <div className="min-h-screen flex flex-col">
         <FloatingNavbar onNavigate={handleNavigation} />
         <EventsList 
           department={currentView.department}
           onBack={handleBackToHome}
           onEventSelect={handleEventSelect}
         />
+        <Footer />
       </div>
     );
   }
 
   if (currentView.type === 'event-details') {
     return (
-      <div>
+      <div className="min-h-screen flex flex-col">
         <FloatingNavbar onNavigate={handleNavigation} />
         <EventDetails 
           event={currentView.event}
           onBack={handleBackToEvents}
           onRegister={() => handleEventRegister(currentView.event)}
         />
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <FloatingNavbar onNavigate={handleNavigation} />
       <div id="home">
         <HeroSection 
@@ -195,6 +200,7 @@ const Index = memo(() => {
       <div id="contact">
         <ContactSection />
       </div>
+      <Footer />
     </div>
   );
 });

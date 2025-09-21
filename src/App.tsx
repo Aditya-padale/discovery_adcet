@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AdminPanel from "./pages/AdminPanel";
 import { RegistrationForm } from "./components/RegistrationForm";
+import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +33,11 @@ const App = () => (
       >
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/register" element={<RegistrationForm />} />
+          <Route path="/register" element={
+            <div className="min-h-screen flex flex-col">
+              <RegistrationForm />
+            </div>
+          } />
           <Route path="/admin" element={<AdminPanel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
