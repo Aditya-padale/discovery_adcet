@@ -26,7 +26,7 @@ interface EventDetailsProps {
 
 export const EventDetails = ({ event, onBack, onRegister }: EventDetailsProps) => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8">
+    <section className="pt-24 pb-12 sm:pt-32 sm:pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between gap-4 mb-8">

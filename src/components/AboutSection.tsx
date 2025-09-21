@@ -27,7 +27,7 @@ export const AboutSection = () => {
       title: "Innovation",
       description: "Cutting-edge tech solutions across engineering domains",
       details: "From AI & ML to IoT, blockchain to robotics - explore the latest technological frontiers with hands-on challenges that push the boundaries of what's possible.",
-      stats: "15+ Tech Events",
+      stats: "24+ Tech Events",
       gradient: "from-cyan-500 to-blue-500"
     },
     {

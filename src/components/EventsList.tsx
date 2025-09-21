@@ -15,7 +15,7 @@ export const EventsList = memo(({ department, onBack, onEventSelect }: EventsLis
   const events = getEventsByDepartment(department.id);
 
   return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8">
+    <section className="pt-24 pb-12 sm:pt-32 sm:pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-6 sm:mb-8">
