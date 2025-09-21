@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Sparkles, Code, Trophy, Users } from "lucide-react";
+import { Sparkles, Code, Trophy, Users } from "lucide-react";
 
 export const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -145,13 +145,6 @@ export const AboutSection = () => {
                   <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
                     {feature.details}
                   </p>
-
-                  {/* Hover indicator */}
-                  <div className={`absolute bottom-4 right-4 transition-all duration-300 ${
-                    activeCard === index ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
-                  }`}>
-                    <ArrowRight className="w-5 h-5 text-gray-400" />
-                  </div>
                 </div>
               </div>
             );
