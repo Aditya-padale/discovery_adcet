@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Trophy, Users, UserPlus } from "lucide-react";
-import { memo, useState, useEffect, lazy, Suspense, useCallback } from "react";
-import { PerformanceToggle } from "./PerformanceToggle";
+import { memo, useState, useEffect, lazy, Suspense } from "react";
 
 // Lazy load Galaxy component
 const Galaxy = lazy(() => import("./Galaxy"));
@@ -13,57 +12,17 @@ interface HeroSectionProps {
 
 export const HeroSection = memo(({ onExploreEvents, onRegister }: HeroSectionProps) => {
   const [showGalaxy, setShowGalaxy] = useState(false);
-  const [isHighPerformance, setIsHighPerformance] = useState(true);
-
-  const handlePerformanceToggle = useCallback((enabled: boolean) => {
-    setIsHighPerformance(enabled);
-    if (enabled && !showGalaxy) {
-      setTimeout(() => setShowGalaxy(true), 500);
-    } else if (!enabled) {
-      setShowGalaxy(false);
-    }
-  }, [showGalaxy]);
 
   useEffect(() => {
-    // Check device performance capabilities
-    const checkPerformance = () => {
-      const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-      
-      if (!gl) {
-        setIsHighPerformance(false);
-        return;
-      }
-
-      // More strict performance checks
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      const hasLowRAM = (navigator as any).deviceMemory && (navigator as any).deviceMemory < 6; // Increased threshold
-      const hasLowCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 6; // Increased threshold  
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const isLowBandwidth = (navigator as any).connection && (navigator as any).connection.effectiveType === 'slow-2g';
-      
-      // Check for integrated graphics (Intel) - simplified check
-      const isWebGLSupported = !!gl;
-      
-      if (isMobile || hasLowRAM || hasLowCPU || prefersReducedMotion || isLowBandwidth || !isWebGLSupported) {
-        setIsHighPerformance(false);
-      } else {
-        setIsHighPerformance(true);
-        // Longer delay for Galaxy loading to ensure page is fully loaded
-        setTimeout(() => setShowGalaxy(true), 2000);
-      }
-    };
-
-    checkPerformance();
+    // Always enable high performance and show Galaxy
+    // Delay Galaxy loading to ensure page is fully loaded
+    setTimeout(() => setShowGalaxy(true), 2000);
   }, []);
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Performance Toggle */}
-      <PerformanceToggle onToggle={handlePerformanceToggle} initialState={isHighPerformance} />
-      
-      {/* Galaxy Background - Conditional for performance */}
+      {/* Galaxy Background - Always enabled for high performance */}
       <div className="absolute inset-0 z-0">
-        {isHighPerformance && showGalaxy ? (
+        {showGalaxy ? (
           <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-background via-primary/5 to-secondary/10" />}>
             <Galaxy 
               mouseRepulsion={true}
@@ -78,7 +37,7 @@ export const HeroSection = memo(({ onExploreEvents, onRegister }: HeroSectionPro
             />
           </Suspense>
         ) : (
-          /* Fallback gradient background for low-performance devices */
+          /* Loading gradient background */
           <div className="w-full h-full bg-gradient-to-br from-background via-primary/5 to-secondary/10" />
         )}
       </div>
