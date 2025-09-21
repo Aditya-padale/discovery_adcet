@@ -37,23 +37,23 @@ export const FloatingNavbar = ({ onNavigate }: NavbarProps) => {
         scrolled
           ? "bg-black/20 backdrop-blur-xl border border-white/40"
           : "bg-black/10 backdrop-blur-lg border border-white/30"
-      } rounded-full px-6 py-3 flex items-center gap-6`}
+      } rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center gap-2 sm:gap-6 max-w-[95vw] overflow-x-auto`}
     >
       {/* Logo */}
-      <div className="flex items-center gap-2 text-white">
-        <div className="w-8 h-8 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-          <Atom className="w-5 h-5 text-white" />
+      <div className="flex items-center gap-2 text-white flex-shrink-0">
+        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
+          <Atom className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
         </div>
-        <span className="font-semibold text-lg">Discovery</span>
+        <span className="font-semibold text-sm sm:text-lg">Discovery</span>
       </div>
 
       {/* Navigation Links */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-1 sm:gap-4 flex-shrink-0">
         <Button
           variant="ghost"
           size="sm"
           onClick={() => handleNavClick("home")}
-          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-4 py-2 transition-all duration-200"
+          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-2 sm:px-4 py-1 sm:py-2 transition-all duration-200 text-xs sm:text-sm"
         >
           Home
         </Button>
@@ -61,7 +61,7 @@ export const FloatingNavbar = ({ onNavigate }: NavbarProps) => {
           variant="ghost"
           size="sm"
           onClick={() => handleNavClick("about")}
-          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-4 py-2 transition-all duration-200"
+          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-2 sm:px-4 py-1 sm:py-2 transition-all duration-200 text-xs sm:text-sm"
         >
           About
         </Button>
@@ -69,7 +69,7 @@ export const FloatingNavbar = ({ onNavigate }: NavbarProps) => {
           variant="ghost"
           size="sm"
           onClick={() => handleNavClick("events")}
-          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-4 py-2 transition-all duration-200"
+          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-2 sm:px-4 py-1 sm:py-2 transition-all duration-200 text-xs sm:text-sm"
         >
           Events
         </Button>
@@ -77,7 +77,7 @@ export const FloatingNavbar = ({ onNavigate }: NavbarProps) => {
           variant="ghost"
           size="sm"
           onClick={() => handleNavClick("registration")}
-          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-4 py-2 transition-all duration-200"
+          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-2 sm:px-4 py-1 sm:py-2 transition-all duration-200 text-xs sm:text-sm"
         >
           Register
         </Button>
@@ -85,7 +85,7 @@ export const FloatingNavbar = ({ onNavigate }: NavbarProps) => {
           variant="ghost"
           size="sm"
           onClick={() => handleNavClick("contact")}
-          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-4 py-2 transition-all duration-200"
+          className="text-white/90 hover:text-white hover:bg-white/5 rounded-full px-2 sm:px-4 py-1 sm:py-2 transition-all duration-200 text-xs sm:text-sm"
         >
           Contact
         </Button>

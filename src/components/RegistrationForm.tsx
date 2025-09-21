@@ -432,16 +432,16 @@ export const RegistrationForm = ({ eventTitle, onBack, showFooter = true }: Regi
   }
 
   return (
-    <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 flex flex-col">
+    <div className="min-h-screen py-12 sm:py-20 px-4 sm:px-6 lg:px-8 flex flex-col">
       <div className="max-w-3xl mx-auto flex-1">
         <Card>
           <CardHeader className="text-center">
             <div className="flex items-center justify-center mb-4">
-              <UserPlus className="h-8 w-8 text-primary mr-2" />
-              <CardTitle className="text-3xl font-bold">Event Registration</CardTitle>
+              <UserPlus className="h-6 w-6 sm:h-8 sm:w-8 text-primary mr-2" />
+              <CardTitle className="text-2xl sm:text-3xl font-bold">Event Registration</CardTitle>
             </div>
             {eventTitle && (
-              <CardDescription className="text-lg">
+              <CardDescription className="text-base sm:text-lg">
                 Register for: <span className="font-semibold text-primary">{eventTitle}</span>
               </CardDescription>
             )}
@@ -851,7 +851,7 @@ export const RegistrationForm = ({ eventTitle, onBack, showFooter = true }: Regi
 
                 <Separator />
 
-                <div className="flex space-x-4 pt-4">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 pt-4">
                   {onBack && (
                     <Button
                       type="button"
@@ -875,7 +875,8 @@ export const RegistrationForm = ({ eventTitle, onBack, showFooter = true }: Regi
                     ) : (
                       <>
                         <UserPlus className="mr-2 h-4 w-4" />
-                        Proceed to Payment (₹{totalFee}/-)
+                        <span className="hidden xs:inline">Proceed to Payment</span>
+                        <span className="xs:hidden">Payment</span> (₹{totalFee}/-)
                       </>
                     )}
                   </Button>

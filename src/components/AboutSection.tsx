@@ -51,7 +51,7 @@ export const AboutSection = () => {
   return (
     <section 
       id="about-section"
-      className="min-h-screen flex items-center justify-center py-32 px-4 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center py-20 sm:py-32 px-4 relative overflow-hidden"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
@@ -61,15 +61,15 @@ export const AboutSection = () => {
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${
+        <div className={`text-center mb-12 sm:mb-20 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-full border border-cyan-500/30 mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-full border border-cyan-500/30 mb-6 sm:mb-8">
             <Sparkles className="w-4 h-4 text-cyan-400" />
             <span className="text-sm font-medium text-cyan-300">About Discovery</span>
           </div>
           
-          <h2 className="text-6xl md:text-7xl font-bold mb-8 leading-tight">
+          <h2 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold mb-6 sm:mb-8 leading-tight">
             <span className="bg-gradient-to-r from-white via-cyan-200 to-purple-300 bg-clip-text text-transparent">
               Future of
             </span>
@@ -79,26 +79,26 @@ export const AboutSection = () => {
             </span>
           </h2>
           
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed opacity-90">
+          <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed opacity-90">
             A national platform where creativity meets technology, 
             fostering the next generation of innovators.
           </p>
         </div>
 
         {/* Information Paragraph */}
-        <div className={`max-w-4xl mx-auto mb-20 transition-all duration-1000 delay-300 ${
+        <div className={`max-w-4xl mx-auto mb-12 sm:mb-20 transition-all duration-1000 delay-300 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <div className="relative p-8 rounded-2xl bg-gradient-to-br from-gray-900/30 to-gray-800/20 backdrop-blur-xl border border-gray-700/30">
+          <div className="relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-gray-900/30 to-gray-800/20 backdrop-blur-xl border border-gray-700/30">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/5 via-purple-500/5 to-pink-500/5"></div>
             <div className="relative">
-              <p className="text-lg text-gray-300 leading-relaxed mb-4">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-4">
                 <span className="text-cyan-400 font-semibold">Discovery 2K25</span> is more than just a technical festival—it's a transformative journey that brings together the brightest minds from engineering, management, information technology, and food technology disciplines. Organized annually, this prestigious event has evolved into a cornerstone of academic excellence and innovation.
               </p>
-              <p className="text-lg text-gray-300 leading-relaxed mb-4">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed mb-4">
                 Our mission is to create an ecosystem where theoretical knowledge meets practical application, where ideas transform into reality, and where students don't just participate—they <span className="text-purple-400 font-semibold">innovate, collaborate, and lead</span>. With industry partnerships, expert mentorship, and cutting-edge challenges, Discovery provides unparalleled opportunities for skill development and career advancement.
               </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 Whether you're passionate about <span className="text-pink-400 font-semibold">artificial intelligence</span>, <span className="text-orange-400 font-semibold">sustainable engineering</span>, <span className="text-green-400 font-semibold">business innovation</span>, or <span className="text-yellow-400 font-semibold">culinary technology</span>—Discovery 2K25 offers a platform to showcase your talent, learn from industry leaders, and connect with a community that shares your vision for the future.
               </p>
             </div>
@@ -106,7 +106,7 @@ export const AboutSection = () => {
         </div>
 
         {/* Feature Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (

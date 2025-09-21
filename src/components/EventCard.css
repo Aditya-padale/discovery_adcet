@@ -28,12 +28,32 @@
   place-items: center;
   width: 100%;
   max-width: 22rem;
-  height: 32rem;
+  height: 28rem;
   overflow: hidden;
   border-radius: 0.625rem;
   box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
   cursor: pointer;
   margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 100%;
+    height: 24rem;
+    margin: 0;
+  }
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 768px) {
+  .card:hover {
+    transform: translateY(-4px);
+  }
 }
 
 .card > * {
@@ -71,11 +91,18 @@
   position: relative;
   width: fit-content;
   width: -moz-fit-content; /* Prefijo necesario para Firefox  */
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-family: var(--font-title);
   color: var(--white);
   line-height: 1.2;
   margin: 0 0 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .card__title {
+    font-size: 1.3rem;
+    margin: 0 0 0.8rem 0;
+  }
 }
 
 .card__title::after {
@@ -88,12 +115,35 @@
   background-color: var(--brand-color);
 }
 
+@media (max-width: 768px) {
+  .card__title::after {
+    height: 0.25rem;
+    width: calc(100% + 1rem);
+    bottom: calc((1rem - 0.4rem) * -1);
+    left: -1rem;
+  }
+}
+
 .card__description {
   font-family: var(--font-text);
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   color: var(--white);
   margin: 0 0 1.5rem 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .card__description {
+    font-size: 0.85rem;
+    margin: 0 0 1rem 0;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
 }
 
 .card__button {
@@ -110,11 +160,25 @@
   color: var(--black);
   cursor: pointer;
   margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .card__button {
+    padding: 0.6em 1.2em;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+  }
 }
 
 .card__button:focus {
   outline: 2px solid black;
   outline-offset: -5px;
+}
+
+.card__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @media (any-hover: hover) and (any-pointer: fine) {
