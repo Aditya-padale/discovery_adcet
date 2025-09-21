@@ -4,7 +4,6 @@ import { AboutSection } from "@/components/AboutSection";
 import { DepartmentGrid, Department } from "@/components/DepartmentGrid";
 import { EventsList } from "@/components/EventsList";
 import { EventDetails } from "@/components/EventDetails";
-import { ScheduleSection } from "@/components/ScheduleSection";
 import { ContactSection } from "@/components/ContactSection";
 import { RegistrationForm } from "@/components/RegistrationForm";
 import { FloatingNavbar } from "@/components/FloatingNavbar";
@@ -86,65 +85,47 @@ const Index = memo(() => {
         'aeronauticalengineering': {
           id: 'aeronautical',
           name: 'Aeronautical Engineering',
-          icon: null,
-          eventCount: 3,
-          gradient: 'from-neon-blue to-primary'
+          eventCount: 3
         },
         'mechanicalengineering': {
           id: 'mechanical',
           name: 'Mechanical Engineering', 
-          icon: null,
-          eventCount: 3,
-          gradient: 'from-neon-orange to-accent'
+          eventCount: 3
         },
         'electricalengineering': {
           id: 'electrical',
           name: 'Electrical Engineering',
-          icon: null,
-          eventCount: 3,
-          gradient: 'from-neon-green to-secondary'
+          eventCount: 3
         },
         'civilengineering': {
           id: 'civil',
           name: 'Civil Engineering',
-          icon: null,
-          eventCount: 3,
-          gradient: 'from-neon-purple to-primary'
+          eventCount: 3
         },
         'computerscienceengineering': {
           id: 'cse',
           name: 'Computer Science Engineering',
-          icon: null,
-          eventCount: 3,
-          gradient: 'from-primary to-neon-pink'
+          eventCount: 3
         },
         'aidatascience': {
           id: 'aids',
           name: 'AI & Data Science',
-          icon: null,
-          eventCount: 3,
-          gradient: 'from-secondary to-neon-blue'
+          eventCount: 3
         },
         'iotcybersecurity': {
           id: 'iot',
           name: 'IoT & Cyber Security',
-          icon: null,
-          eventCount: 3,
-          gradient: 'from-accent to-neon-green'
+          eventCount: 3
         },
         'businessadministration': {
           id: 'bba',
           name: 'Business Administration',
-          icon: null,
-          eventCount: 1,
-          gradient: 'from-neon-orange to-neon-purple'
+          eventCount: 1
         },
         'foodtechnology': {
           id: 'food',
           name: 'Food Technology',
-          icon: null,
-          eventCount: 2,
-          gradient: 'from-neon-pink to-neon-orange'
+          eventCount: 2
         }
       };
 
@@ -211,7 +192,6 @@ const Index = memo(() => {
       <div id="events">
         <DepartmentGrid onDepartmentSelect={handleDepartmentSelect} />
       </div>
-      <ScheduleSection />
       <div id="contact">
         <ContactSection />
       </div>
