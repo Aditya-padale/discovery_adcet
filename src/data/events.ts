@@ -97,14 +97,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
       ],
       coordinators: {
         faculty: {
-          name: "Dr. Sudharson Murugan",
-          phone: "9790551772",
-          email: "sm_aero@adcet.in"
+          name: "Dr. Sakthipriya Balu",
+          phone: "9500713664",
+          email: "sbl_aero@adcet.in"
         },
         student: {
-          name: "Vedanti Gondhali", 
-          phone: "9867980126",
-          email: "vedantigondhali@gmail.com"
+          name: "Pradyumn Deshmukh", 
+          phone: "9404013880",
+          email: "pradyumndeshmukh28@gmail.com"
         }
       }
     },
@@ -129,14 +129,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
       ],
       coordinators: {
         faculty: {
-          name: "Dr. Sudharson Murugan",
-          phone: "9790551772",
-          email: "sm_aero@adcet.in"
+          name: "Mr. Sabarishwaran R",
+          phone: "9500395443",
+          email: "sr_aero@adcet.in"
         },
         student: {
-          name: "Vedanti Gondhali", 
-          phone: "9867980126",
-          email: "vedantigondhali@gmail.com"
+          name: "Anil Nandkumar Bhanuse", 
+          phone: "7028280307",
+          email: "anilbhanuse18@gmail.com"
         }
       }
     }
@@ -163,14 +163,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
     rules: paperPresentationRules,
     coordinators: {
       faculty: {
-        name: "Mr. Suhas R. Deore",
-        phone: "9822455821",
-        email: "srd_mech@adcet.in"
+        name: "Mr. Ajit R. Mane",
+        phone: "9850567931",
+        email: "arm_mech@adcet.in"
       },
       student: {
-        name: "Arjun Patil", 
-        phone: "9876543210",
-        email: "arjunpatil@gmail.com"
+        name: "Mr. Suyash Santosh Koli", 
+        phone: "9359756062",
+        email: "suyashkoli100@gmail.com"
       }
     }
     },
@@ -199,14 +199,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
       ],
       coordinators: {
         faculty: {
-          name: "Mr. Suhas R. Deore",
-          phone: "9822455821",
-          email: "srd_mech@adcet.in"
+          name: "Mr. Pritam V. Mali",
+          phone: "8600664009",
+          email: ""
         },
         student: {
-          name: "Arjun Patil", 
-          phone: "9876543210",
-          email: "arjunpatil@gmail.com"
+          name: "Aman Mulla", 
+          phone: "7385303243",
+          email: ""
         }
       }
     },
@@ -231,14 +231,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
       ],
       coordinators: {
         faculty: {
-          name: "Mr. Suhas R. Deore",
-          phone: "9822455821",
-          email: "srd_mech@adcet.in"
+          name: "Dr. R. R. Gaji",
+          phone: "9923391006",
+          email: ""
         },
         student: {
-          name: "Arjun Patil", 
-          phone: "9876543210",
-          email: "arjunpatil@gmail.com"
+          name: "Shailendra Prakash Wadar", 
+          phone: "9322493449",
+          email: ""
         }
       }
     }
@@ -265,14 +265,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
     rules: paperPresentationRules,
     coordinators: {
       faculty: {
-        name: "Mrs. Rutuja S Pawar",
-        phone: "9765317323",
-        email: "rutuja_elec@adcet.in"
+        name: "Mr. I.D.Pharane",
+        phone: "9657240024",
+        email: "idp_ele@adcet.in"
       },
       student: {
-        name: "Ms. Samruddhi Patil",
-        phone: "9021681044",
-        email: "samruddhi@gmail.com"
+        name: "Mr. Sujal Gaikwad",
+        phone: "9021982438",
+        email: "sujalgaikwad2500@gmail.com"
       }
     }
     },
@@ -341,14 +341,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
     rules: paperPresentationRules,
     coordinators: {
       faculty: {
-        name: "Mr. Atul N. Kolekar",
-        phone: "9545428026",
-        email: "Ank_civil@adcet.in"
+        name: "Dr. Vidya A. Lande",
+        phone: "7387102650",
+        email: "val_civil@adcet.in"
       },
       student: {
-        name: "Aman Attar",
-        phone: "9356709191",
-        email: "amanattar0303@gmail.com"
+        name: "Vivek Lohar",
+        phone: "9309735699",
+        email: "loharvivek110@gmail.com"
       }
     }
     },
@@ -416,14 +416,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
     rules: paperPresentationRules,
     coordinators: {
       faculty: {
-        name: "Mr. Yogesh V. Koli",
-        phone: "9503265322",
-        email: "yvk_cse@adect.in"
+        name: "Dr. B. A. Jadhawar",
+        phone: "9284068550",
+        email: "baj_cse@adcet.in"
       },
       student: {
-        name: "Mr. Zahoorahmad Sayyad",
-        phone: "8767354046",
-        email: "zahoor.adcet@gmail.com"
+        name: "Mr. Swapnil Patil",
+        phone: "9322524034",
+        email: "swapnilp3104@gmail.com"
       }
     }
     },
@@ -492,14 +492,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
     rules: paperPresentationRules,
     coordinators: {
       faculty: {
-        name: "Ms. Suvarna Dalvi",
-        phone: "9850785532",
-        email: "suvarna_dalvi@adect.in"
+        name: "Mrs. Priyank S. Patil",
+        phone: "7875642616",
+        email: "psp_aids@adcet.in"
       },
       student: {
-        name: "Ms. Khushi Pardeshi",
-        phone: "8805439076",
-        email: "khushi.pardeshi@gmail.com"
+        name: "Kavyanjali Kishor Kamble",
+        phone: "9309079890",
+        email: "kavyanjalikamble29@gmail.com"
       }
     }
     },
@@ -520,7 +520,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
         "Entry fee is non-refundable; participants must carry ID cards."
       ],
       coordinators: {
-        faculty: { name: "Mr. V. N. Honmane", phone: "+91 8329490361", email: "Vikas_aids@adcet.in" },
+        faculty: { name: "Mr. V. N. Honmane", phone: "8329490361", email: "Vikas_aids@adcet.in" },
         student: { name: "Ronit Swami", phone: "8208980085", email: "ronitswami43@gmail.com" }
       }
     },
@@ -567,14 +567,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
     rules: paperPresentationRules,
     coordinators: {
       faculty: {
-        name: "Mr. Sujeet Shirke",
-        phone: "8805439076",
-        email: "sujeet_shirke@adect.in"
+        name: "Mr Samish N Kamble",
+        phone: "8856855737",
+        email: "snk_iot@adcet.in"
       },
       student: {
-        name: "Mr. Soham Jadhav",
-        phone: "9834526781",
-        email: "soham.jadhav@gmail.com"
+        name: "Ms Sakshi Pawar",
+        phone: "9356856211",
+        email: "Pawarsakshee25@gmail.com"
       }
     }
     },
@@ -656,14 +656,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Develop innovative functional food products with enhanced health benefits and nutritional value. Design foods that go beyond basic nutrition, incorporating bioactive compounds and therapeutic properties for modern dietary needs.",
       coordinators: {
         faculty: {
-          name: "Dr. Priya Sharma",
-          phone: "9876543210",
-          email: "priya_food@adcet.in"
+          name: "Dr. Jagruti J. Jankar",
+          phone: "7028492068",
+          email: "jjj_ft@adcet.in"
         },
         student: {
-          name: "Sneha Kulkarni",
-          phone: "8765432109",
-          email: "snehakulkarni@gmail.com"
+          name: "Sahil Suresh Ghatage",
+          phone: "7385166092",
+          email: "sahilghatage970@gmail.com"
         }
       }
     },
@@ -677,14 +677,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Create and prototype revolutionary new food products with commercial market potential. From concept to prototype, demonstrate innovation in food processing, packaging, preservation, and consumer appeal.",
       coordinators: {
         faculty: {
-          name: "Dr. Priya Sharma",
-          phone: "9876543210",
-          email: "priya_food@adcet.in"
+          name: "Mr Yashodip R. Pawar",
+          phone: "8308571863",
+          email: "yrp_ft@adcet.in"
         },
         student: {
-          name: "Sneha Kulkarni",
-          phone: "8765432109",
-          email: "snehakulkarni@gmail.com"
+          name: "Vaishnavi Suryawanshi",
+          phone: "8227987675",
+          email: ""
         }
       }
     }
