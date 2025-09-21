@@ -21,6 +21,20 @@ dist-ssr
 backend/node_modules
 backend/dist
 
+# Build artifacts
+build/
+out/
+
+# Test files
+test-*.js
+*.test.js
+*.spec.js
+
+# Temporary files
+*.tmp
+*.temp
+out_*.txt
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -31,3 +45,12 @@ backend/dist
 *.njsproj
 *.sln
 *.sw?
+
+# OS generated files
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db

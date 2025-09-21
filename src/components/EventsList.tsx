@@ -45,7 +45,7 @@ export const EventsList = memo(({ department, onBack, onEventSelect }: EventsLis
             >
               <img
                 className="card__background"
-                src={event.image || "/placeholder.svg"}
+                src={event.image || "/event-images/placeholder.svg"}
                 alt={`${event.name} event`}
                 width="1920"
                 height="2193"

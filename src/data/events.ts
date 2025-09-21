@@ -41,7 +41,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Aeronautical Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/paper_presentation.png",
+      image: "/event-images/paper_presentation.png",
       description: "Present cutting-edge research on advanced aeronautical engineering topics including materials science, structural design, aerodynamics, and UAV technologies. Showcase your academic research and technical expertise to industry professionals.",
       topics: [
         "Advanced Materials and Manufacturing",
@@ -83,7 +83,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Aeronautical Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/Paper_Glider.png",
+      image: "/event-images/Paper_Glider.png",
       description: "Design and build innovative paper gliders optimized for maximum flight distance and time. Test your aerodynamic knowledge and engineering skills in this exciting hands-on competition where creativity meets physics.",
       rules: [
         "Teams must consist of minimum 2 and maximum 4 members.",
@@ -114,7 +114,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Aeronautical Engineering", 
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/Water_rocket.png",
+      image: "/event-images/Water_rocket.png",
       description: "Build and launch water-powered rockets for maximum altitude and accuracy. Apply principles of propulsion, aerodynamics, and structural design to create the ultimate high-flying rocket using only water and compressed air.",
       rules: [
         "Teams must consist of minimum 2 and maximum 4 members.",
@@ -148,7 +148,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Mechanical Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/paper_presentation.png",
+      image: "/event-images/paper_presentation.png",
       description: "Present innovative research in mechanical engineering covering automation, automotive innovations, thermal systems, manufacturing processes, and renewable energy technologies. Share groundbreaking ideas and technical solutions.",
       topics: [
         "Advances in Automation and Robotics",
@@ -180,7 +180,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Mechanical Engineering",
       maxTeamSize: 2,
       entryFee: 100,
-      image: "/Robo_race.png",
+      image: "/event-images/Robo_race.png",
       description: "Design and build high-speed autonomous robots to navigate through challenging race tracks filled with obstacles. Showcase your robotics, programming, and mechanical engineering skills in this thrilling competition."
       ,
       rules: [
@@ -216,7 +216,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Mechanical Engineering",
       maxTeamSize: 1,
       entryFee: 100,
-      image: "/Cad_Conquer.png",
+      image: "/event-images/Cad_Conquer.png",
       description: "Showcase your 3D modeling and CAD design skills in this intensive individual competition. Create complex mechanical components and assemblies using industry-standard software like SolidWorks or CATIA under time pressure."
       ,
       rules: [
@@ -250,7 +250,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Electrical Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/paper_presentation.png",
+      image: "/event-images/paper_presentation.png",
       description: "Present cutting-edge research in electrical engineering covering power electronics, renewable energy systems, smart grid technologies, and digital signal processing. Showcase innovative solutions for modern electrical challenges.",
       topics: [
         "Power Electronics and Drives",
@@ -282,7 +282,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Electrical Engineering",
       maxTeamSize: 2,
       entryFee: 100,
-      image: "/Circuit_builder.png",
+      image: "/event-images/Circuit_builder.png",
       description: "Design and build functional electronic circuits to solve complex engineering challenges. Test your knowledge of electrical components, circuit analysis, and practical implementation skills in this hands-on competition."
       ,
       rules: [
@@ -303,7 +303,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Electrical Engineering",
       maxTeamSize: 2,
       entryFee: 100,
-      image: "/Troubleshooting.png",
+      image: "/event-images/Troubleshooting.png",
       description: "Identify and fix electrical circuit problems under intense time pressure. Test your analytical skills, circuit knowledge, and problem-solving abilities as you diagnose complex electrical faults in real-world scenarios."
       ,
       rules: [
@@ -326,7 +326,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Civil Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/paper_presentation.png",
+      image: "/event-images/paper_presentation.png",
       description: "Present innovative solutions in civil engineering including sustainable construction materials, smart cities infrastructure, earthquake-resistant design, and water resources management. Address modern urban development challenges.",
       topics: [
         "Sustainable Construction Materials",
@@ -358,7 +358,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Civil Engineering",
       maxTeamSize: 1,
       entryFee: 100,
-      image: "/akruti.png",
+      image: "/event-images/akruti.png",
       description: "Individual structural design and analysis competition showcasing architectural and engineering excellence. Demonstrate your drafting skills, structural knowledge, and creative problem-solving in civil engineering design challenges."
       ,
       rules: [
@@ -378,7 +378,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Civil Engineering",
       maxTeamSize: 2,
       entryFee: 100,
-      image: "/setu.png",
+      image: "/event-images/setu.png",
       description: "Bridge design and construction challenge testing engineering fundamentals and structural analysis. Build efficient load-bearing bridges using popsicle sticks and demonstrate your understanding of structural mechanics and design optimization."
       ,
       rules: [
@@ -401,7 +401,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Computer Science Engineering",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/paper_presentation.png",
+      image: "/event-images/paper_presentation.png",
       description: "Present innovative computer science research covering artificial intelligence, blockchain technology, cloud computing, cybersecurity, data science, IoT, and mobile application development. Showcase cutting-edge technological solutions.",
       topics: [
         "Artificial Intelligence and Machine Learning",
@@ -433,7 +433,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Computer Science Engineering",
       maxTeamSize: 1,
       entryFee: 100,
-      image: "/code_to_compete.png",
+      image: "/event-images/code_to_compete.png",
       description: "Individual competitive programming challenge featuring algorithmic problem-solving and data structures. Test your coding skills through multiple rounds including MCQs and intensive programming tasks on HackerRank platform."
       ,
       rules: [
@@ -454,7 +454,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Computer Science Engineering",
       maxTeamSize: 2,
       entryFee: 200,
-      image: "/b_plan.png",
+      image: "/event-images/b_plan.png",
       description: "Present your innovative startup business plan and pitch your entrepreneurial ideas to industry experts. Showcase your business acumen, market analysis, and financial projections in this comprehensive business competition."
       ,
       rules: [
@@ -477,7 +477,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "AI & Data Science",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/paper_presentation.png",
+      image: "/event-images/paper_presentation.png",
       description: "Present groundbreaking research on AI and data science applications including deep learning, natural language processing, computer vision, predictive analytics, and ethical AI. Explore the future of intelligent systems.",
       topics: [
         "Deep Learning and Neural Networks",
@@ -509,7 +509,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "AI & Data Science",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/Bgmi_dominator.png",
+      image: "/event-images/Bgmi_dominator.png",
       description: "Ultimate esports competition featuring intense Battlegrounds Mobile India (BGMI) battles. Form your squad and compete in strategic team-based gaming tournaments for the championship title and exciting prizes."
       ,
       rules: [
@@ -530,7 +530,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "AI & Data Science",
       maxTeamSize: 1,
       entryFee: 100,
-      image: "/Coding_Compi.png",
+      image: "/event-images/Coding_Compi.png",
       description: "Individual coding challenge focusing on advanced algorithms and data structures. Solve complex programming problems across multiple rounds, testing your logical thinking, optimization skills, and coding proficiency under time constraints."
       ,
       rules: [
@@ -552,7 +552,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "IoT & Cyber Security",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/paper_presentation.png",
+      image: "/event-images/paper_presentation.png",
       description: "Present cutting-edge innovations in IoT and cybersecurity covering IoT security, blockchain integration, edge computing, industrial IoT, smart cities, threat detection, and digital forensics. Address modern security challenges.",
       topics: [
         "IoT Security and Privacy",
@@ -584,7 +584,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "IoT & Cyber Security",
       maxTeamSize: 2,
       entryFee: 100,
-      image: "/Ideathon.png",
+      image: "/event-images/Ideathon.png",
       description: "Brainstorm and pitch innovative IoT solutions addressing real-world challenges. Develop creative technology concepts, create prototypes, and present your ideas to industry experts in this intensive innovation competition."
       ,
       rules: [
@@ -604,7 +604,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "IoT & Cyber Security",
       maxTeamSize: 6,
       entryFee: 100,
-      image: "/box_cricket.png",
+      image: "/event-images/box_cricket.png",
       description: "Indoor cricket tournament for tech enthusiasts combining sports and technology. Form your team and compete in fast-paced 3-over matches, demonstrating teamwork, strategy, and athletic skills in this exciting recreational competition."
       ,
       rules: [
@@ -626,7 +626,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Business Administration",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/paper_presentation.png",
+      image: "/event-images/paper_presentation.png",
       description: "Present innovative business strategies and management concepts covering digital marketing, sustainable practices, entrepreneurship, financial management, HR strategies, and corporate social responsibility. Explore modern business solutions.",
       topics: [
         "Digital Marketing and E-commerce",
@@ -652,7 +652,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Food technology",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/paper_presentation.png",
+      image: "/event-images/paper_presentation.png",
       description: "Develop innovative functional food products with enhanced health benefits and nutritional value. Design foods that go beyond basic nutrition, incorporating bioactive compounds and therapeutic properties for modern dietary needs.",
       coordinators: {
         faculty: {
@@ -673,7 +673,7 @@ export const eventsByDepartment: Record<string, Event[]> = {
       department: "Food Technology",
       maxTeamSize: 4,
       entryFee: 100,
-      image: "/New_Product_Development.png",
+      image: "/event-images/New_Product_Development.png",
       description: "Create and prototype revolutionary new food products with commercial market potential. From concept to prototype, demonstrate innovation in food processing, packaging, preservation, and consumer appeal.",
       coordinators: {
         faculty: {

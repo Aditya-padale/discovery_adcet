@@ -45,16 +45,24 @@ npm run dev
 ## Project Structure
 
 ```
-src/
-├── components/          # Reusable UI components
-│   ├── ui/             # shadcn/ui components
-│   ├── HeroSection.tsx
-│   ├── EventsList.tsx
-│   └── ...
-├── data/               # Static data files
-├── hooks/              # Custom React hooks
-├── lib/                # Utility functions
-└── pages/              # Page components
+├── docs/                # Documentation files
+├── public/              # Static assets
+│   ├── event-images/    # Event-related images
+│   ├── docs/           # PDF documents
+│   ├── favicon.ico
+│   └── robots.txt
+├── src/
+│   ├── components/      # Reusable UI components
+│   │   ├── ui/         # shadcn/ui components
+│   │   ├── HeroSection.tsx
+│   │   ├── EventsList.tsx
+│   │   └── ...
+│   ├── data/           # Static data files
+│   ├── hooks/          # Custom React hooks
+│   ├── lib/            # Utility functions
+│   ├── pages/          # Page components
+│   └── utils/          # Helper utilities
+└── backend/            # Backend API server
 ```
 
 ## Contributing

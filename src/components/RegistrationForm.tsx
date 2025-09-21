@@ -309,7 +309,7 @@ export const RegistrationForm = ({ eventTitle, onBack }: RegistrationFormProps) 
         currency: "INR",
         name: "Discovery ADCET 2025",
         description: `Registration for ${registrationData.selectedEvent}`,
-        image: window.location.origin + "/temp_icon.png", // Your logo
+        image: window.location.origin + "/event-images/temp_icon.png", // Your logo
         order_id: orderId,
         prefill: {
           name: registrationData.leaderName,
