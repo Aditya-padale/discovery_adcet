@@ -86,13 +86,21 @@ export const eventsByDepartment: Record<string, Event[]> = {
       image: "/event-images/Paper_Glider.png",
       description: "Design and build innovative paper gliders optimized for maximum flight distance and time. Test your aerodynamic knowledge and engineering skills in this exciting hands-on competition where creativity meets physics.",
       rules: [
-        "Teams must consist of minimum 2 and maximum 4 members.",
-        "Rockets/gliders must be constructed only from paper, tape and adhesive (no cardboard, plastic, metal, wood or foam).",
-        "Maximum length: 30 cm; maximum diameter: 5 cm; maximum weight: 50 grams.",
-        "Rockets/gliders must be a single self-contained unit; no external guidance or active stabilization devices allowed.",
-        "Each team will have two official launch attempts; the best score will be considered for ranking.",
-        "Pre-flight inspection by judges is mandatory; non-compliant entries will be disqualified.",
-        "Safety goggles must be worn by team members in the launch area.",
+        "The competition is open to all enrolled engineering students.",
+        "Teams must consist of a minimum of two (2) and a maximum of four (4) members.",
+        "Each team may only submit one (1) rocket for the competition.",
+        "Rockets must be constructed exclusively from paper, tape, and adhesive (glue, glue sticks, etc.).",
+        "Prohibited materials include, but are not limited to: cardboard, plastic, metal, wood, foam, or any pre-fabricated components.",
+        "Maximum Length: 30 cm; Maximum Diameter: 5 cm; Maximum Weight: 50 grams.",
+        "The rocket will be weighed by the judges before each launch attempt.",
+        "The rocket must be a single, self-contained unit with no external devices or components for guidance, deployment, or active stabilization.",
+        "Each team will be given two (2) official launch attempts. The best score from these two attempts will be used for final ranking.",
+        "All rockets must pass a pre-flight inspection by the judges to verify adherence to all material and specification rules before being cleared for launch.",
+        "The final score will be a combination of flight duration (measured in seconds) and horizontal distance (measured in meters).",
+        "All participants, judges, and spectators must be at a safe distance from the launch pad as designated by event staff.",
+        "All team members within the designated launch area must wear safety goggles, which will be provided.",
+        "Any team or individual found to be engaging in unsafe behavior will be immediately disqualified.",
+        "A team will be disqualified for failure to meet rocket specifications, use of unapproved materials, tampering with the official launch system, or unsportsmanlike conduct.",
         "Entry Fee: Rs. 100/- per participant."
       ],
       coordinators: {
@@ -117,14 +125,29 @@ export const eventsByDepartment: Record<string, Event[]> = {
       image: "/event-images/Water_rocket.png",
       description: "Build and launch water-powered rockets for maximum altitude and accuracy. Apply principles of propulsion, aerodynamics, and structural design to create the ultimate high-flying rocket using only water and compressed air.",
       rules: [
-        "Teams must consist of minimum 2 and maximum 4 members.",
-        "Rockets must be built around standard PET bottles (2L or smaller). Additional materials such as paper, cardboard, tape and adhesives are permitted for fins and nose cones; metal, wood or glass are prohibited.",
-        "Maximum length: 75 cm. Water volume must not exceed one-third of bottle capacity.",
-        "Propellant allowed: water and compressed air only; no other liquids, gases or solid propellants permitted.",
-        "Rockets must be a single self-contained unit; fins/nose cones must be securely attached and not detach during flight.",
-        "A standardized launcher will be provided; teams may not use their own launch systems.",
-        "Organizers will set and maintain a standard launch pressure (80 psi) for all rockets.",
-        "Pre-launch checks will be performed by judges; non-compliant entries will be disqualified.",
+        "The competition is open to all enrolled engineering students.",
+        "Teams must consist of a minimum of two (2) and a maximum of four (4) members.",
+        "Each team may only submit one (1) rocket for the competition.",
+        "Rockets must be constructed from one or more standard plastic soda bottles (PET bottles).",
+        "Additional materials such as paper, cardboard, tape, and adhesive (glue, glue sticks, etc.) are permitted for fins, nose cones, and other external components.",
+        "Prohibited materials include, but are not limited to: metal, wood, glass, or any pre-fabricated components designed for model rocketry.",
+        "The rocket must be built around a main body tube of standard 2 L or smaller plastic soda bottles.",
+        "Maximum Length: 75 cm. The maximum diameter is determined by the bottle used.",
+        "The only propellant is water and compressed air. No other liquids, gases, or solid propellants are permitted.",
+        "Water Volume: A maximum of 1/3 of the bottle's total volume. This will be measured by judges prior to launch.",
+        "The rocket must be a single, self-contained unit.",
+        "Fins and nose cones must be securely attached and may not detach during flight.",
+        "No external devices or components for active guidance, deployment, or stabilization are permitted.",
+        "All rockets will be launched using a standardized water rocket launcher provided by the competition organizers. Teams are not permitted to use their own launch systems.",
+        "The launch system will be pressurized to a standard pressure of 80 psi for all rockets.",
+        "Each team will be given two (2) official launch attempts. The best score from these two attempts will be used for final ranking.",
+        "All rockets must pass a pre-flight inspection by the judges to verify adherence to all material and specification rules before being cleared for launch.",
+        "The final score will be a combination of flight duration (measured in seconds) and horizontal distance (measured in meters).",
+        "Safety is the highest priority. All participants, judges, and spectators must be at a safe distance from the launch pad as designated by event staff.",
+        "All team members within the designated launch area must wear safety goggles, which will be provided.",
+        "Do not attempt to modify the launch system. Any tampering will result in immediate disqualification.",
+        "Any team or individual found to be engaging in unsafe behavior will be immediately disqualified.",
+        "A team will be disqualified for failure to meet rocket specifications, use of unapproved materials or propellants, tampering with the official launch system, or unsportsmanlike conduct or unsafe behavior.",
         "Entry Fee: Rs. 100/- per participant."
       ],
       coordinators: {
@@ -184,18 +207,29 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Design and build high-speed autonomous robots to navigate through challenging race tracks filled with obstacles. Showcase your robotics, programming, and mechanical engineering skills in this thrilling competition."
       ,
       rules: [
-        "Bot dimensions must not exceed 300 mm x 300 mm x 300 mm (L x B x H).",
-        "Bot weight must not exceed 4 kg.",
-        "Bots must be manually controlled; maximum allowed voltage is 12V.",
-        "Ready-made LEGO kits or any ready-made mechanisms are not permitted.",
-        "Only two members of the team are allowed to handle and operate the bot during the run.",
-        "Bots must not damage the arena; any team causing arena damage will be disqualified.",
-        "If the bot breaks into multiple parts during the run it will lead to immediate disqualification.",
-        "All bots will undergo a safety check before starting; unsafe bots will be disqualified.",
-        "Teams will be given five minutes to prepare their bots; failure to start within this time will lead to disqualification.",
-        "Only three hand touches are allowed during the run; after the third touch the team will be disqualified.",
-        "Referee decisions are final and binding.",
-        "Race gameplay: the bot must navigate between checkpoints; skipping an obstacle will result in point deductions; if the bot goes out of track it must be restarted from the previous checkpoint; complete all checkpoints to finish the race."
+        "The dimensions of the bot must not exceed 300 mm x 300 mm x 300 mm (L X B X H).",
+        "Weight of bot should not exceed 4kg.",
+        "Bot must be controlled manually.",
+        "The Machine cannot be constructed using ready-made 'Lego kits' or any ready-made mechanism.",
+        "The maximum allowed voltage to power the robot is 12V.",
+        "Failing to meet any of the above specifications will lead to disqualification of the team.",
+        "Only two members of the team are allowed to handle and operate the bot.",
+        "The bot should not damage the arena. In case of arena damage team will be immediately Disqualified.",
+        "The bot should not break or split into two or more Parts during the run. In such a case the team will be Disqualified immediately.",
+        "The bot would be checked for safety before starting and disqualified if found unsafe for other players.",
+        "The bots will be given five minutes to prepare their bots for the race.",
+        "If a participant team fails to start the bot after 5 minutes the team will be disqualified.",
+        "No one can comment on the referee's decision.",
+        "Only three hand touches are allowed. After the third touch, the participant will be disqualified.",
+        "The race begins with the teams launching their bot From a START mark.",
+        "Checkpoints are strategically placed throughout the Course.",
+        "The bot must navigate between checkpoints without damaging the obstacles.",
+        "If in case the team is unable to cross the obstacle then the team can choose to skip the obstacle.",
+        "If an obstacle is skipped then the points will be Deducted.",
+        "If the bot goes out of the track then start it from the Previous checkpoint.",
+        "During the game if any of the team members touch the bot without the approval of the organizer then the bot has to start from the previous checkpoint.",
+        "During the game bot has to cover all checkpoints and Finally reach the final endpoint then only the race Will be completed.",
+        "Entry Fee: Rs. 100/- per participant."
       ],
       coordinators: {
         faculty: {
@@ -220,14 +254,17 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Showcase your 3D modeling and CAD design skills in this intensive individual competition. Create complex mechanical components and assemblies using industry-standard software like SolidWorks or CATIA under time pressure."
       ,
       rules: [
-        "Individual participation only. If entries exceed 45 candidates, a pre-qualifier round will be conducted.",
-        "Participants should use SolidWorks or CATIA for modeling.",
-        "Computer and software facilities will be provided at the venue.",
-        "Participants are not allowed to bring digital gadgets or external storage devices into the event hall.",
-        "Evaluation will be conducted by the event management team using predefined rubrics.",
-        "The task will be revealed during the event and the maximum time allowed per candidate is 1 hour.",
-        "Exceeding the scheduled time may lead to the submission not being considered for evaluation.",
-        "Final output must be submitted in PDF format to the event management team."
+        "Individual participation is allowed and If the entry is more than 45 candidates, pre-qualifier round will be conducted.",
+        "Participant should make the models in Solid works /CATIA.",
+        "Computer and software facility will be provided in the event venue.",
+        "Participant are not allowed to take digital gadgets and storage devices inside the event hall.",
+        "Evaluation will be conducted by the Event management team with pre-defined rubrics.",
+        "Task will be revealed during the event, and maximum time allowed in 1 hour for the event per candidate.",
+        "If the candidate is consuming more time over the scheduled period will not be considered for evaluation.",
+        "Event will be conducted in the scheduled time, flexibility will not be there.",
+        "Focus areas are CAD Modelling, Assembly, Drafting and Rendering.",
+        "Final output has to be in PDF file format, and it should be submitted to the Event Management team.",
+        "Entry Fee: Rs. 100/-"
       ],
       coordinators: {
         faculty: {
@@ -286,11 +323,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Design and build functional electronic circuits to solve complex engineering challenges. Test your knowledge of electrical components, circuit analysis, and practical implementation skills in this hands-on competition."
       ,
       rules: [
-        "Participants must carry valid college ID cards.",
-        "The event consists of 2 rounds; each round has a predefined time limit.",
-        "Participants are not allowed to use electronic accessories inside the venue hall.",
-        "Round 1 is an offline quiz; Round 2 requires building a circuit from a given diagram.",
-        "All decisions of the event management and judges are final."
+        "Student must carry a valid college ID card.",
+        "Event consist of 2 rounds.",
+        "There will be certain time span for each round.",
+        "Participants should not use any electronic accessories inside a venue hall.",
+        "All the rights related with the competition are reserved to organizers.",
+        "Round 1: This is offline quiz round where you will be boosting your knowledge.",
+        "Round 2: Here's the most interesting part, based on of given circuit diagram you have to build the same circuit using the components.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Mrs. Rutuja S Pawar", phone: "9765317323", email: "" },
@@ -307,11 +347,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Identify and fix electrical circuit problems under intense time pressure. Test your analytical skills, circuit knowledge, and problem-solving abilities as you diagnose complex electrical faults in real-world scenarios."
       ,
       rules: [
-        "Ten circuits will be provided during the event.",
+        "Total 10 Circuits will be provided.",
         "Only two participants are permitted per team.",
-        "Each team will get one minute to find the fault in each circuit.",
+        "Each Team will get one Minutes to find out Fault in one circuit.",
+        "The answer paper will be distributed at the commencement of the event.",
         "College ID cards and event registration receipts must be brought on the day of the event.",
-        "Judges' decisions are final and the host institute reserves the right to modify rules."
+        "Host institute reserves rights related to modification and updating the rules for successful completion of the event.",
+        "Decision of Judges will be final.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Mr. P. D. More", phone: "09657175613", email: "pdm_ele@adcet.in" },
@@ -362,10 +405,11 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Individual structural design and analysis competition showcasing architectural and engineering excellence. Demonstrate your drafting skills, structural knowledge, and creative problem-solving in civil engineering design challenges."
       ,
       rules: [
-        "Single participant per entry.",
-        "Problem statement provided at the start of the event.",
-        "Evaluation based on drafting accuracy, detailing, labeling and use of appropriate coloring.",
-        "Final assessment will consider completeness and effective utilization of time."
+        "Each team shall consist of a single participant only.",
+        "The problem statement will be distributed at the beginning of the event.",
+        "Evaluation criteria will include drafting accuracy, detailing, labeling, and use of appropriate coloring.",
+        "Final assessment will be based on overall completeness of the drawing and effective utilization of time.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Mr. Atul N. Kolekar", phone: "9545428026", email: "Ank_civil@adcet.in" },
@@ -382,11 +426,28 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Bridge design and construction challenge testing engineering fundamentals and structural analysis. Build efficient load-bearing bridges using popsicle sticks and demonstrate your understanding of structural mechanics and design optimization."
       ,
       rules: [
-        "Each team may have up to two members and must be registered students.",
-        "Bridge span: 60 cm (±1 cm); max height 20 cm; max width 8 cm.",
-        "Bridges must be constructed only with popsicle sticks and white adhesive glue; no other adhesives or fasteners allowed.",
-        "Bridges must sustain the applied load for at least 20 seconds; teams get four incremental loading attempts.",
-        "Use of unauthorized materials or non-compliance will lead to disqualification."
+        "Span (clear distance between supports): 60 cm (±1 cm).",
+        "Maximum height: 20 cm.",
+        "Maximum width: 8 cm.",
+        "The bridge must be a free-standing structure without external support.",
+        "Bridges must be constructed solely with Popsicle sticks and white adhesive glue (e.g., Fevicol type).",
+        "The use of any other adhesives, fasteners, pins, clips, wires, or tapes is strictly prohibited.",
+        "Popsicle sticks may be cut or trimmed but must not be split into multiple thin pieces.",
+        "Bridges must be completed prior to the event day and brought to the venue for testing.",
+        "Each team is responsible for transporting their bridge safely; any damage during transit is the team's responsibility.",
+        "Each team must consist of maximum two members. All participants must be registered students of their respective institutions.",
+        "Load will be applied at the center of the span.",
+        "Additional loading will be done using sandbags or small weights.",
+        "Participants themselves will apply the load under supervision.",
+        "The bridge must sustain the applied load for at least 20 seconds.",
+        "Teams will be given four attempts to increase the load incrementally.",
+        "The load carried just before failure will be recorded for calculation.",
+        "The Strength-to-Weight Ratio will be calculated as: Load carried in kg before failure / Bridge weight in g",
+        "Use of unauthorized materials, non-compliance with specifications, or misconduct will result in disqualification.",
+        "Teams must submit their bridge at the registration desk before testing begins.",
+        "Once submitted, bridges cannot be altered or repaired.",
+        "The organizers reserve the right to modify rules if necessary, and any such changes will be announced before evaluation.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Dr. Bajirao V. Mane", phone: "9373277474", email: "bvm_civil@adcet.in" },
@@ -437,11 +498,16 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Individual competitive programming challenge featuring algorithmic problem-solving and data structures. Test your coding skills through multiple rounds including MCQs and intensive programming tasks on HackerRank platform."
       ,
       rules: [
-        "Contest has two rounds: Round 1 is 1 hour (MCQ), Round 2 is 2 hours (programming).",
-        "Round 1 contains 50 MCQs; Round 2 contains 3 problem statements.",
-        "Shortlisted students from Round 1 advance to Round 2.",
-        "Plagiarism will result in immediate disqualification.",
-        "Preferred languages: C, C++, Java, Python. Round 2 environment: HackerRank."
+        "The contest will be having two rounds. 1st round continues for 1 hour and 2nd round will continue for 2 hours.",
+        "Contestants are given MCQ test of 50 questions based on C, C++, Java and Python concepts in 1st round and 3 problem statements in 2nd round.",
+        "Shortlisted students from 1st round can appear for 2nd round.",
+        "Statements of all problems become available to read at the moment the round starts.",
+        "If any plagiarism is found in the code of the participant, he/she will be disqualified immediately.",
+        "If any copy cases found in Round1, the participant will be directly eliminated from the contest.",
+        "Participants must prefer C,C++,Java or Python to solve problems.",
+        "Environmental setup for Round2: HackerRank.",
+        "The leader board generated will be final and no queries about it will be entertained.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Mr. Yogesh V. Koli", phone: "9503265322", email: "yvk_cse@adect.in" },
@@ -458,11 +524,14 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Present your innovative startup business plan and pitch your entrepreneurial ideas to industry experts. Showcase your business acumen, market analysis, and financial projections in this comprehensive business competition."
       ,
       rules: [
-        "Maximum team size: 2 students per team.",
-        "Poster must be 300–800 words and readable from 10 feet.",
+        "Team size: Maximum 2 students per team.",
+        "Poster must be 300 –800 words, readable from 10 feet.",
+        "Use clear graphics, colors, and fonts for better impact.",
         "Presentation time: 10 minutes + 5 minutes Q&A.",
         "Teams must present both poster and business idea to judges.",
-        "Entry fee: Rs. 200 (per participant or per team of 2)."
+        "Entry fee: Rs. 200/- (per participant or per team of 2).",
+        "Posters and presentations must be clear, concise, and focused on key aspects.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Mrs. Shubhangi Patil", phone: "9730623168", email: "spp1_cse@adcet.in" },
@@ -513,11 +582,17 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Ultimate esports competition featuring intense Battlegrounds Mobile India (BGMI) battles. Form your squad and compete in strategic team-based gaming tournaments for the championship title and exciting prizes."
       ,
       rules: [
-        "Players must join the room 10 minutes prior to match time.",
-        "All players must be in the registered list.",
-        "Any suspicious activity or use of cheats will result in disqualification.",
-        "Use only in-game voice chat while playing; organizers are not responsible for participant connectivity issues.",
-        "Entry fee is non-refundable; participants must carry ID cards."
+        "The player should join the room 10 min prior to the match time.",
+        "All the players in the squad should be in the registered list.",
+        "Any suspicious activity detected then the squad will be disqualified.",
+        "Any use of unfair means such as aimbot, trigger bot, ESP and other then the squad will be disqualified.",
+        "Any game modifying tool is not allowed.",
+        "Only in game voice chat should be used while playing.",
+        "Organizers would not be held responsible for the connectivity issue of the participant's side.",
+        "The entry fee will not be refunded under any circumstances.",
+        "The BGMI app must be in its updated version.",
+        "Participants should carry their id cards.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Mr. V. N. Honmane", phone: "8329490361", email: "Vikas_aids@adcet.in" },
@@ -534,10 +609,12 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Individual coding challenge focusing on advanced algorithms and data structures. Solve complex programming problems across multiple rounds, testing your logical thinking, optimization skills, and coding proficiency under time constraints."
       ,
       rules: [
-        "Contest has 3 rounds; problems are revealed at the start of each round.",
-        "Each round will have two problems and last approximately 30 minutes per round.",
-        "Plagiarism will result in disqualification.",
-        "Preferred languages as per event guidelines."
+        "Contest have 3 round, problems are given at the time of round.",
+        "Each round 2 problems are given.",
+        "If any plagiarism is found, participant will be disqualified.",
+        "Single participant.",
+        "Every round must be of 30 min.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Ms. Smita Dhanaji Patil", phone: "7498695865", email: "Sdp_aids@adect.in" },
@@ -588,10 +665,16 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Brainstorm and pitch innovative IoT solutions addressing real-world challenges. Develop creative technology concepts, create prototypes, and present your ideas to industry experts in this intensive innovation competition."
       ,
       rules: [
-        "Teams may have up to 2 members; cross-department and cross-year teams allowed.",
-        "Initial submission must include a brief (≈500-word) abstract.",
-        "Final submission should include a presentation, prototype demo (if applicable) and documentation.",
-        "Abstract submission deadline: 1st October 2025. Deadlines will be strictly followed."
+        "Teams can have a maximum of 2 members.",
+        "Cross-department and cross-year collaborations are allowed.",
+        "No individual can be a member of more than one team.",
+        "Teams can work on any topic relevant to the event theme (e.g., technology, innovation, sustainability.",
+        "Projects should be original and not previously submitted in other competitions.",
+        "Initial submission should include a brief (500-word) abstract outlining the idea.",
+        "Final submission must include a presentation, prototype demo (if applicable), and supporting documentation.",
+        "Deadline to submit abstract is 1st October 2025.",
+        "Deadlines for abstract and final submission will be strictly followed.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Mrs. Prachi S. Pathak", phone: "9158839366", email: "" },
@@ -608,10 +691,13 @@ export const eventsByDepartment: Record<string, Event[]> = {
       description: "Indoor cricket tournament for tech enthusiasts combining sports and technology. Form your team and compete in fast-paced 3-over matches, demonstrating teamwork, strategy, and athletic skills in this exciting recreational competition."
       ,
       rules: [
-        "Each team shall consist of six players; a player may represent only one team.",
-        "Matches are 3 overs per side; each bowler may bowl a maximum of 1 over.",
-        "Throw bowling is prohibited; umpire decisions are final.",
-        "In case of tie, a Super Over will decide the winner."
+        "Each team shall consist of six (6) players. A player may represent only one team.",
+        "The match shall be of three (3) overs per side, with each bowler permitted to bowl a maximum of one (1) over.",
+        "Throw bowling is strictly prohibited. Legitimacy of bowling action shall be determined solely by the umpire.",
+        "In the event of a tie, a Super Over shall be conducted to determine the winner.",
+        "Umpire's decisions shall be final and binding. Any argument or dispute with the umpire will result in immediate disqualification of the team.",
+        "All rules and regulations shall be explained and clarified before the commencement of the match.",
+        "Entry Fee: Rs. 100/- Per Participant."
       ],
       coordinators: {
         faculty: { name: "Prof. Kumarsagar M. Dange", phone: "9922425350", email: "" },
@@ -654,6 +740,15 @@ export const eventsByDepartment: Record<string, Event[]> = {
       entryFee: 100,
       image: "/event-images/paper_presentation.png",
       description: "Develop innovative functional food products with enhanced health benefits and nutritional value. Design foods that go beyond basic nutrition, incorporating bioactive compounds and therapeutic properties for modern dietary needs.",
+      rules: [
+        "The idea to be presented must focus on food, food processing, and food waste management.",
+        "The idea should be innovative, creative, and achievable.",
+        "The idea should be presented using MS PowerPoint presentations only.",
+        "Each group must have a minimum of 1 and a maximum of 4 participants.",
+        "Each presenter will have a maximum of 10 minutes for their presentation.",
+        "After the presentation, there will be a 10-minute question and answer session.",
+        "Entry Fee: Rs. 100/- Per Participant."
+      ],
       coordinators: {
         faculty: {
           name: "Dr. Jagruti J. Jankar",
@@ -675,6 +770,19 @@ export const eventsByDepartment: Record<string, Event[]> = {
       entryFee: 100,
       image: "/event-images/New_Product_Development.png",
       description: "Create and prototype revolutionary new food products with commercial market potential. From concept to prototype, demonstrate innovation in food processing, packaging, preservation, and consumer appeal.",
+      rules: [
+        "Product must be unique or significantly better than existing options.",
+        "Avoid copies of competitors' products.",
+        "Product must comply with national and international standards (e.g., FSSAI, FDA, ISO, HACCP).",
+        "Product must be technically feasible with available resources.",
+        "Product should be cost-effective for both producer and consumer.",
+        "Create small-scale prototypes and present them at the time of event.",
+        "Sensory evaluation will be conducted during the event's official evaluation by a pane of judge.",
+        "Each group/Team must consist of minimum 1 to maximum 4 members.",
+        "Each presenter will get a maximum of 5 minutes for their presentation.",
+        "All development must adhere to ethical standards, including safety and intellectual property respect.",
+        "Entry Fee: Rs. 100/- Per Participant."
+      ],
       coordinators: {
         faculty: {
           name: "Mr Yashodip R. Pawar",
