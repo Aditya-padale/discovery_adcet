@@ -231,7 +231,9 @@ export default memo(function Galaxy({
       alpha: transparent,
       premultipliedAlpha: false,
       antialias: false, // Disable antialiasing for better performance
-      powerPreference: 'high-performance'
+      powerPreference: 'high-performance',
+      depth: false, // Disable depth testing for better performance
+      stencil: false // Disable stencil buffer for better performance
     });
     const gl = renderer.gl;
 
@@ -322,6 +324,9 @@ export default memo(function Galaxy({
 
       renderer.render({ scene: mesh });
     }
+    
+    // Render first frame immediately to show galaxy without delay
+    renderer.render({ scene: mesh });
     animateId = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 

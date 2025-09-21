@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Trophy, Users, UserPlus } from "lucide-react";
-import { memo, useState, useEffect, lazy, Suspense } from "react";
-
-// Lazy load Galaxy component
-const Galaxy = lazy(() => import("./Galaxy"));
+import { memo } from "react";
+import Galaxy from "./Galaxy";
 
 interface HeroSectionProps {
   onExploreEvents: () => void;
@@ -11,35 +9,21 @@ interface HeroSectionProps {
 }
 
 export const HeroSection = memo(({ onExploreEvents, onRegister }: HeroSectionProps) => {
-  const [showGalaxy, setShowGalaxy] = useState(false);
-
-  useEffect(() => {
-    // Always enable high performance and show Galaxy
-    // Delay Galaxy loading to ensure page is fully loaded
-    setTimeout(() => setShowGalaxy(true), 2000);
-  }, []);
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Galaxy Background - Always enabled for high performance */}
       <div className="absolute inset-0 z-0">
-        {showGalaxy ? (
-          <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-background via-primary/5 to-secondary/10" />}>
-            <Galaxy 
-              mouseRepulsion={true}
-              mouseInteraction={true}
-              density={0.8}
-              glowIntensity={0.2}
-              saturation={0.4}
-              hueShift={240}
-              transparent={false}
-              speed={0.5}
-              rotationSpeed={0.05}
-            />
-          </Suspense>
-        ) : (
-          /* Loading gradient background */
-          <div className="w-full h-full bg-gradient-to-br from-background via-primary/5 to-secondary/10" />
-        )}
+        <Galaxy 
+          mouseRepulsion={true}
+          mouseInteraction={true}
+          density={0.8}
+          glowIntensity={0.2}
+          saturation={0.4}
+          hueShift={240}
+          transparent={false}
+          speed={0.5}
+          rotationSpeed={0.05}
+        />
       </div>
       
       {/* Overlay for better text readability */}
